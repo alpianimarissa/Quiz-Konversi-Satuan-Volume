@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jago Konversi Satuan Volume - Matematika Interaktif</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom scrollbar for horizontal tabs on mobile */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Navbar / Header -->
+    <header class="bg-gradient-to-r from-teal-600 via-emerald-600 to-cyan-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-3 md:py-4 flex flex-col lg:flex-row justify-between items-center gap-3">
+            <div class="flex items-center space-x-3 w-full lg:w-auto justify-between lg:justify-start">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-white/20 p-2.5 rounded-2xl backdrop-blur-md shadow-inner text-2xl">🧪</div>
+                    <div>
+                        <h1 class="text-lg md:text-xl font-extrabold tracking-tight">Master Konversi Volume</h1>
+                        <p class="text-xs text-teal-100">Belajar Mengubah Satuan Liter & Kubik Tanpa Bingung</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs -->
+            <nav class="flex overflow-x-auto no-scrollbar w-full lg:w-auto justify-start lg:justify-end gap-1.5 bg-black/15 p-1.5 rounded-xl backdrop-blur-sm text-xs">
+                <button onclick="switchTab('tujuan')" class="tab-btn whitespace-nowrap px-3 py-2 font-bold rounded-lg transition-all bg-white text-teal-700 shadow" data-target="tujuan">🎯 1. Tujuan</button>
+                <button onclick="switchTab('warmup')" class="tab-btn whitespace-nowrap px-3 py-2 font-bold rounded-lg transition-all text-white hover:bg-white/15" data-target="warmup">🚀 2. Warm-Up</button>
+                <button onclick="switchTab('aplikasi')" class="tab-btn whitespace-nowrap px-3 py-2 font-bold rounded-lg transition-all text-white hover:bg-white/15" data-target="aplikasi">🌍 3. Penerapan</button>
+                <button onclick="switchTab('materi')" class="tab-btn whitespace-nowrap px-3 py-2 font-bold rounded-lg transition-all text-white hover:bg-white/15" data-target="materi">📚 4. Materi & Trik</button>
+                <button onclick="switchTab('contoh')" class="tab-btn whitespace-nowrap px-3 py-2 font-bold rounded-lg transition-all text-white hover:bg-white/15" data-target="contoh">💡 5. Contoh Soal</button>
+                <button onclick="switchTab('latihan')" class="tab-btn whitespace-nowrap px-3 py-2 font-bold rounded-lg transition-all text-white hover:bg-white/15" data-target="latihan">✍️ 6. Latihan Terbimbing</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6">
+
+        <!-- ========================================== -->
+        <!-- TAB 1: TUJUAN PEMBELAJARAN                 -->
+        <!-- ========================================== -->
+        <section id="tujuan" class="tab-content active space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200">
+                <div class="max-w-3xl">
+                    <span class="inline-block bg-teal-100 text-teal-800 text-xs font-extrabold px-3 py-1 rounded-full mb-3">Misi Belajar Hari Ini</span>
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-slate-900 mb-4">Taklukkan Konversi Satuan Volume! 🎯</h2>
+                    <p class="text-slate-600 text-sm md:text-base leading-relaxed">
+                        Pernah bingung kenapa <strong>2 Liter</strong> berubah jadi <strong>2.000 ml</strong>? Atau pusing saat ketemu soal cerita tentang air galon yang dituang ke gelas kecil? Tenang! Hari ini kita akan belajar cara mengubah satuan volume dengan cepat, mudah, dan anti-lupa.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
+                    <div class="bg-gradient-to-br from-teal-50 to-emerald-50 p-5 rounded-2xl border border-teal-200/70">
+                        <div class="text-3xl mb-3">🧠</div>
+                        <h3 class="font-bold text-teal-950 mb-1 text-sm">1. Hafal Urutan Tangga</h3>
+                        <p class="text-xs text-teal-800 leading-relaxed">Mengingat urutan tangga satuan <strong>Liter (kl sampai ml)</strong> dan <strong>Kubik (km³ sampai mm³)</strong> dengan kalimat jembatan keledai yang lucu.</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-5 rounded-2xl border border-blue-200/70">
+                        <div class="text-3xl mb-3">🌉</div>
+                        <h3 class="font-bold text-blue-950 mb-1 text-sm">2. Jembatan Penghubung</h3>
+                        <p class="text-xs text-blue-800 leading-relaxed">Memahami hubungan ajaib antara satuan Liter dan Kubik (seperti <strong>1 Liter = 1 dm³</strong> dan <strong>1 ml = 1 cm³</strong>).</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-amber-50 to-orange-50 p-5 rounded-2xl border border-amber-200/70">
+                        <div class="text-3xl mb-3">⚡</div>
+                        <h3 class="font-bold text-amber-950 mb-1 text-sm">3. Konversi Soal Langsung</h3>
+                        <p class="text-xs text-amber-800 leading-relaxed">Mahir menghitung perkalian 10 / 1.000 saat turun tangga, serta pembagian saat naik tangga (termasuk angka koma).</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-5 rounded-2xl border border-purple-200/70">
+                        <div class="text-3xl mb-3">📖</div>
+                        <h3 class="font-bold text-purple-950 mb-1 text-sm">4. Bedah Soal Cerita</h3>
+                        <p class="text-xs text-purple-800 leading-relaxed">Menyelesaikan masalah sehari-hari yang mencampur satuan berbeda dengan langkah-langkah terbimbing.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-slate-900 text-white p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl">💡</span>
+                        <p class="text-xs md:text-sm text-slate-200"><strong>Aturan Emas Konversi:</strong> Kamu tidak boleh menjumlahkan atau mengurangi dua benda jika satuannya belum sama!</p>
+                    </div>
+                    <button onclick="switchTab('warmup')" class="w-full sm:w-auto whitespace-nowrap bg-teal-500 hover:bg-teal-400 text-slate-950 font-extrabold px-6 py-3 rounded-xl shadow-md transition-all text-sm">
+                        Mulai Warm-Up (4 Soal) 🚀
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: WARM-UP (4 SOAL PEMANASAN LOGIKA)   -->
+        <!-- ========================================== -->
+        <section id="warmup" class="tab-content space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 gap-3">
+                    <div>
+                        <span class="inline-block bg-amber-100 text-amber-800 text-xs font-extrabold px-3 py-1 rounded-full mb-2">Pemanasan Logika & Perkalian 10</span>
+                        <h2 class="text-2xl font-extrabold text-slate-900">Warm-Up: Cek Kesiapan Otak 🧠</h2>
+                        <p class="text-slate-600 text-sm">Sebelum naik-turun tangga satuan, yuk pemanasan dulu dengan 4 soal logika takaran dan hitung cepat!</p>
+                    </div>
+                    <div class="bg-teal-50 border border-teal-200 px-4 py-2.5 rounded-xl text-xs font-extrabold text-teal-800">
+                        Skor Warm-Up: <span id="warmup-score" class="text-base text-teal-600">0</span> / 4
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Warmup 1 -->
+                    <div class="warmup-card bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col justify-between" data-q="1">
+                        <div>
+                            <span class="text-xs font-bold text-teal-600 uppercase">Soal 1 • Logika Ukuran</span>
+                            <p class="font-bold text-slate-800 text-sm md:text-base mt-1 mb-4">Ibu membeli 1 botol sirup berukuran <strong>1 Liter</strong> dan 1 kotak susu kecil berukuran <strong>250 Mililiter (ml)</strong>. Manakah yang isinya lebih banyak?</p>
+                        </div>
+                        <div class="space-y-2">
+                            <button onclick="checkWarmup(1, this)" data-correct="true" class="w-text-left w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">A. Botol sirup 1 Liter (karena 1 Liter = 1.000 ml)</button>
+                            <button onclick="checkWarmup(1, this)" class="w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">B. Kotak susu 250 ml (karena angkanya 250 lebih besar dari 1)</button>
+                            <button onclick="checkWarmup(1, this)" class="w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">C. Keduanya sama banyak</button>
+                            <div class="feedback-box hidden mt-3 p-3 rounded-xl text-xs font-semibold"></div>
+                        </div>
+                    </div>
+
+                    <!-- Warmup 2 -->
+                    <div class="warmup-card bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col justify-between" data-q="2">
+                        <div>
+                            <span class="text-xs font-bold text-teal-600 uppercase">Soal 2 • Bermain Angka Nol</span>
+                            <p class="font-bold text-slate-800 text-sm md:text-base mt-1 mb-4">Dalam tangga konversi, setiap turun 1 tangga kita kali 10 (tambah satu nol). Jika angka <strong>45</strong> dikali <strong>1.000</strong>, hasilnya adalah...</p>
+                        </div>
+                        <div class="space-y-2">
+                            <button onclick="checkWarmup(2, this)" class="w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">A. 450</button>
+                            <button onclick="checkWarmup(2, this)" class="w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">B. 4.500</button>
+                            <button onclick="checkWarmup(2, this)" data-correct="true" class="w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">C. 45.000</button>
+                            <div class="feedback-box hidden mt-3 p-3 rounded-xl text-xs font-semibold"></div>
+                        </div>
+                    </div>
+
+                    <!-- Warmup 3 -->
+                    <div class="warmup-card bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col justify-between" data-q="3">
+                        <div>
+                            <span class="text-xs font-bold text-teal-600 uppercase">Soal 3 • Menggeser Koma</span>
+                            <p class="font-bold text-slate-800 text-sm md:text-base mt-1 mb-4">Jika angka desimal <strong>2,5</strong> dikali dengan <strong>100</strong> (geser koma ke kanan 2 langkah), maka hasilnya menjadi...</p>
+                        </div>
+                        <div class="space-y-2">
+                            <button onclick="checkWarmup(3, this)" class="w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">A. 25</button>
+                            <button onclick="checkWarmup(3, this)" data-correct="true" class="w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">B. 250</button>
+                            <button onclick="checkWarmup(3, this)" class="w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">C. 2.500</button>
+                            <div class="feedback-box hidden mt-3 p-3 rounded-xl text-xs font-semibold"></div>
+                        </div>
+                    </div>
+
+                    <!-- Warmup 4 -->
+                    <div class="warmup-card bg-slate-50 p-5 rounded-2xl border border-slate-200 flex flex-col justify-between" data-q="4">
+                        <div>
+                            <span class="text-xs font-bold text-teal-600 uppercase">Soal 4 • Membagi dengan 1.000</span>
+                            <p class="font-bold text-slate-800 text-sm md:text-base mt-1 mb-4">Ayah punya <strong>7.500 ml</strong> air mineral. Jika dibagi <strong>1.000</strong> untuk diubah ke Liter (coret atau geser koma ke kiri 3 langkah), hasilnya adalah...</p>
+                        </div>
+                        <div class="space-y-2">
+                            <button onclick="checkWarmup(4, this)" data-correct="true" class="w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">A. 7,5 Liter</button>
+                            <button onclick="checkWarmup(4, this)" class="w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">B. 75 Liter</button>
+                            <button onclick="checkWarmup(4, this)" class="w-full p-3 rounded-xl bg-white border border-slate-300 hover:border-teal-500 text-xs md:text-sm font-semibold transition-all text-left">C. 0,75 Liter</button>
+                            <div class="feedback-box hidden mt-3 p-3 rounded-xl text-xs font-semibold"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-between items-center">
+                    <button onclick="switchTab('tujuan')" class="text-slate-500 text-xs font-bold hover:text-slate-800">← Kembali ke Tujuan</button>
+                    <button onclick="switchTab('aplikasi')" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-xl shadow-md transition-all text-sm">
+                        Lanjut ke Penerapan Nyata 🌍
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: PENERAPAN NYATA                     -->
+        <!-- ========================================== -->
+        <section id="aplikasi" class="tab-content space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200">
+                <span class="inline-block bg-cyan-100 text-cyan-800 text-xs font-extrabold px-3 py-1 rounded-full mb-2">Mengapa Harus Belajar Konversi?</span>
+                <h2 class="text-2xl font-extrabold text-slate-900 mb-2">Konversi Volume di Dunia Nyata 🌍</h2>
+                <p class="text-slate-600 text-sm mb-6">Coba bayangkan kalau kita tidak bisa mengubah satuan volume, hal-hal berikut ini bisa jadi kacau lho!</p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Card 1 -->
+                    <div class="bg-gradient-to-br from-blue-50 to-slate-50 p-6 rounded-2xl border border-blue-200 flex items-start gap-4">
+                        <div class="text-4xl bg-white p-3.5 rounded-2xl shadow-sm border border-blue-100">⛽</div>
+                        <div>
+                            <span class="text-[11px] font-extrabold text-blue-600 uppercase">SPBU & Tangki Motor</span>
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Mengisi Bensin Kendaraan</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Tangki motor tertulis kapasitasnya <strong>4,5 Liter</strong>, sedangkan truk tangki Pertamina membawa <strong>16 kl (Kiloliter)</strong> bensin. Petugas harus tahu 16 kl = 16.000 Liter agar tahu berapa ribu motor yang bisa diisi!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="bg-gradient-to-br from-rose-50 to-slate-50 p-6 rounded-2xl border border-rose-200 flex items-start gap-4">
+                        <div class="text-4xl bg-white p-3.5 rounded-2xl shadow-sm border border-rose-100">💊</div>
+                        <div>
+                            <span class="text-[11px] font-extrabold text-rose-600 uppercase">Kesehatan & Farmasi</span>
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Takaran Obat Sirup & Infus</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Dokter menulis resep: <em>"Minum 3 kali sehari @ 5 ml"</em>, sementara kemasan botol obatnya tertulis <strong>0,06 Liter</strong> (60 ml). Dengan konversi, Ibu tahu obat itu akan habis dalam tepat 4 hari!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="bg-gradient-to-br from-emerald-50 to-slate-50 p-6 rounded-2xl border border-emerald-200 flex items-start gap-4">
+                        <div class="text-4xl bg-white p-3.5 rounded-2xl shadow-sm border border-emerald-100">🐠</div>
+                        <div>
+                            <span class="text-[11px] font-extrabold text-emerald-600 uppercase">Hobi & Rumah Tangga</span>
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Mengisi Akuarium & Toren Air</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Ukuran panjang, lebar, tinggi akuarium diukur dalam <strong>cm³ (sentimeter kubik)</strong>, tapi air yang kita beli atau tuang diukur dalam <strong>Liter</strong>. Di sinilah jembatan <strong>1 Liter = 1.000 cm³</strong> sangat berguna!
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="bg-gradient-to-br from-amber-50 to-slate-50 p-6 rounded-2xl border border-amber-200 flex items-start gap-4">
+                        <div class="text-4xl bg-white p-3.5 rounded-2xl shadow-sm border border-amber-100">🧃</div>
+                        <div>
+                            <span class="text-[11px] font-extrabold text-amber-600 uppercase">Jualan Minuman</span>
+                            <h3 class="font-bold text-slate-900 text-base mb-1">Membagi Es Buah ke Gelas</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">
+                                Penjual membuat <strong>15 Liter</strong> es buah di wadah besar, lalu membaginya ke dalam gelas cup berukuran <strong>250 ml</strong>. Berapa gelas yang bisa dijual? Harus dikonversi dulu agar bisa dibagi!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 flex justify-between items-center">
+                    <button onclick="switchTab('warmup')" class="text-slate-500 text-xs font-bold hover:text-slate-800">← Kembali</button>
+                    <button onclick="switchTab('materi')" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-xl shadow-md transition-all text-sm">
+                        Lanjut ke Materi Lengkap & Trik Hafal 📚
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 4: MATERI LENGKAP & CARA MENGINGAT     -->
+        <!-- ========================================== -->
+        <section id="materi" class="tab-content space-y-8">
+            
+            <!-- BAGIAN A: TRIK HAFAL URUTAN (MNEMONIK) -->
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+                <div>
+                    <span class="inline-block bg-amber-100 text-amber-800 text-xs font-extrabold px-3 py-1 rounded-full mb-2">Rahasia Anti-Lupa</span>
+                    <h2 class="text-2xl font-extrabold text-slate-900">Cara Mudah Menghafal Urutan Satuan 🧠✨</h2>
+                    <p class="text-slate-600 text-sm mt-1">Jangan dihafal kaku! Gunakan <strong>Kalimat Jembatan Keledai</strong> ini untuk mengingat urutan dari paling atas (terbesar) sampai paling bawah (terkecil):</p>
+                </div>
+
+                <div class="bg-gradient-to-r from-amber-50 via-orange-50 to-yellow-50 border-2 border-amber-300 rounded-2xl p-5 md:p-6">
+                    <h3 class="font-extrabold text-amber-950 text-base md:text-lg mb-4 text-center">
+                        🎵 Hafalkan Kalimat Ini: <br class="sm:hidden">
+                        <span class="text-orange-600 bg-white px-3 py-1 rounded-lg shadow-sm inline-block mt-1">"Kucing Hitam Dalam Mobil Desi Centil Mondar-Mandir"</span>
+                    </h3>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-2.5 text-center">
+                        <div class="bg-white p-3 rounded-xl border border-amber-200 shadow-sm">
+                            <div class="text-xs font-bold text-amber-600">Kucing</div>
+                            <div class="text-lg font-extrabold text-slate-900 my-0.5">kl / km³</div>
+                            <div class="text-[10px] text-slate-500">Kilo</div>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-amber-200 shadow-sm">
+                            <div class="text-xs font-bold text-amber-600">Hitam</div>
+                            <div class="text-lg font-extrabold text-slate-900 my-0.5">hl / hm³</div>
+                            <div class="text-[10px] text-slate-500">Hekto</div>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-amber-200 shadow-sm">
+                            <div class="text-xs font-bold text-amber-600">Dalam</div>
+                            <div class="text-lg font-extrabold text-slate-900 my-0.5">dal / dam³</div>
+                            <div class="text-[10px] text-slate-500">Deka</div>
+                        </div>
+                        <div class="bg-teal-600 text-white p-3 rounded-xl border-2 border-teal-800 shadow-md transform scale-105">
+                            <div class="text-xs font-bold text-teal-100">Mobil</div>
+                            <div class="text-lg font-extrabold my-0.5">l / m³</div>
+                            <div class="text-[10px] text-teal-100">Liter / Meter³</div>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-amber-200 shadow-sm">
+                            <div class="text-xs font-bold text-amber-600">Desi</div>
+                            <div class="text-lg font-extrabold text-slate-900 my-0.5">dl / dm³</div>
+                            <div class="text-[10px] text-slate-500">Desi</div>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-amber-200 shadow-sm">
+                            <div class="text-xs font-bold text-amber-600">Centil</div>
+                            <div class="text-lg font-extrabold text-slate-900 my-0.5">cl / cm³</div>
+                            <div class="text-[10px] text-slate-500">Centi</div>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-amber-200 shadow-sm col-span-2 sm:col-span-1">
+                            <div class="text-xs font-bold text-amber-600">Mondar-Mandir</div>
+                            <div class="text-lg font-extrabold text-slate-900 my-0.5">ml / mm³</div>
+                            <div class="text-[10px] text-slate-500">Mili</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BAGIAN B: DUA JENIS TANGGA KONVERSI -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
+                    <!-- Tangga 1: Basis Liter -->
+                    <div class="bg-teal-50/70 p-6 rounded-2xl border border-teal-200 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-teal-950 text-lg">1️⃣ Tangga Satuan LITER (l)</h3>
+                            <span class="bg-teal-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">1 Tangga = ×10 / ÷10</span>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Karena tidak ada pangkat tiga (kubik), setiap lompatan <strong>1 tangga</strong> nilainya dikali atau dibagi <strong>10</strong> (tambah/hilang 1 angka nol).
+                        </p>
+                        <div class="bg-white p-4 rounded-xl border border-teal-200 space-y-1.5 text-xs font-bold">
+                            <div class="bg-teal-800 text-white p-2 rounded-lg w-full">kl (Kiloliter)</div>
+                            <div class="bg-teal-700 text-white p-2 rounded-lg w-[92%] ml-auto">hl (Hektoliter)</div>
+                            <div class="bg-teal-600 text-white p-2 rounded-lg w-[84%] ml-auto">dal (Dekaliter)</div>
+                            <div class="bg-amber-500 text-white p-2 rounded-lg w-[76%] ml-auto shadow">l (Liter) ⭐</div>
+                            <div class="bg-teal-500 text-white p-2 rounded-lg w-[68%] ml-auto">dl (Desiliter)</div>
+                            <div class="bg-teal-400 text-white p-2 rounded-lg w-[60%] ml-auto">cl (Sentiliter)</div>
+                            <div class="bg-teal-300 text-teal-950 p-2 rounded-lg w-[52%] ml-auto">ml (Mililiter)</div>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-teal-200 text-xs space-y-1">
+                            <p class="text-emerald-700 font-bold">⬇️ Turun 1 tangga = × 10 (Nol nambah 1)</p>
+                            <p class="text-rose-700 font-bold">⬆️ Naik 1 tangga = ÷ 10 (Nol hilang 1 / koma geser kiri 1)</p>
+                        </div>
+                    </div>
+
+                    <!-- Tangga 2: Basis Kubik -->
+                    <div class="bg-indigo-50/70 p-6 rounded-2xl border border-indigo-200 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h3 class="font-extrabold text-indigo-950 text-lg">2️⃣ Tangga Satuan KUBIK (m³)</h3>
+                            <span class="bg-indigo-600 text-white text-xs font-extrabold px-3 py-1 rounded-full">1 Tangga = ×1.000 / ÷1.000</span>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            Perhatikan ada tanda <strong>pangkat 3 (³)</strong>! Pangkat 3 artinya setiap lompatan <strong>1 tangga</strong> nilainya dikali atau dibagi <strong>1.000</strong> (tambah/hilang 3 angka nol).
+                        </p>
+                        <div class="bg-white p-4 rounded-xl border border-indigo-200 space-y-1.5 text-xs font-bold">
+                            <div class="bg-indigo-900 text-white p-2 rounded-lg w-full">km³ (Kilometer kubik)</div>
+                            <div class="bg-indigo-800 text-white p-2 rounded-lg w-[92%] ml-auto">hm³ (Hektometer kubik)</div>
+                            <div class="bg-indigo-700 text-white p-2 rounded-lg w-[84%] ml-auto">dam³ (Dekameter kubik)</div>
+                            <div class="bg-amber-500 text-white p-2 rounded-lg w-[76%] ml-auto shadow">m³ (Meter kubik) ⭐</div>
+                            <div class="bg-indigo-500 text-white p-2 rounded-lg w-[68%] ml-auto">dm³ (Desimeter kubik)</div>
+                            <div class="bg-indigo-400 text-white p-2 rounded-lg w-[60%] ml-auto">cm³ (Sentimeter kubik / cc)</div>
+                            <div class="bg-indigo-300 text-indigo-950 p-2 rounded-lg w-[52%] ml-auto">mm³ (Milimeter kubik)</div>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-indigo-200 text-xs space-y-1">
+                            <p class="text-emerald-700 font-bold">⬇️ Turun 1 tangga = × 1.000 (Nol nambah 3)</p>
+                            <p class="text-rose-700 font-bold">⬆️ Naik 1 tangga = ÷ 1.000 (Nol hilang 3 / koma geser kiri 3)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BAGIAN C: JEMBATAN PENGHUBUNG LITER & KUBIK -->
+                <div class="bg-slate-900 text-white rounded-2xl p-6 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <span class="text-3xl">🌉</span>
+                        <div>
+                            <h3 class="font-extrabold text-lg text-amber-400">3️⃣ Jembatan Penghubung (Wajib Hafal!)</h3>
+                            <p class="text-xs text-slate-300">Bagaimana jika soal meminta mengubah dari <strong>Meter Kubik (m³)</strong> ke <strong>Liter</strong>? Gunakan 3 jembatan ini:</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div class="bg-white/10 border border-white/20 p-4 rounded-xl">
+                            <div class="text-xs text-teal-300 font-bold uppercase mb-1">Jembatan Raksasa</div>
+                            <div class="text-xl font-extrabold text-white">1 m³ = 1 kl</div>
+                            <div class="text-xs text-slate-300 mt-1">(atau 1 m³ = 1.000 Liter)</div>
+                        </div>
+                        <div class="bg-amber-500/20 border-2 border-amber-400 p-4 rounded-xl">
+                            <div class="text-xs text-amber-300 font-bold uppercase mb-1">⭐ Jembatan Utama ⭐</div>
+                            <div class="text-xl font-extrabold text-white">1 dm³ = 1 Liter</div>
+                            <div class="text-xs text-amber-100 mt-1">(Ukurannya persis sama!)</div>
+                        </div>
+                        <div class="bg-white/10 border border-white/20 p-4 rounded-xl">
+                            <div class="text-xs text-cyan-300 font-bold uppercase mb-1">Jembatan Kecil</div>
+                            <div class="text-xl font-extrabold text-white">1 cm³ = 1 ml = 1 cc</div>
+                            <div class="text-xs text-slate-300 mt-1">(cc = cubic centimeter)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BAGIAN D: SIMULATOR KONVERSI INTERAKTIF -->
+                <div class="bg-gradient-to-br from-slate-100 to-teal-50 p-6 rounded-2xl border-2 border-teal-300 space-y-4">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">🎛️</span>
+                        <div>
+                            <h3 class="font-extrabold text-slate-900 text-lg">Lab Uji Coba: Simulator Konversi Langsung</h3>
+                            <p class="text-xs text-slate-600">Coba ketik angka apa saja dan pilih satuannya untuk melihat cara kerjanya secara otomatis!</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
+                        <div class="md:col-span-3">
+                            <label class="block text-[11px] font-bold text-slate-500 mb-1">Masukkan Angka:</label>
+                            <input type="number" id="sim-input" value="5" oninput="runSimulator()" class="w-full px-3 py-2.5 border-2 border-slate-300 rounded-xl font-extrabold text-slate-900 focus:border-teal-600 focus:outline-none">
+                        </div>
+                        <div class="md:col-span-3">
+                            <label class="block text-[11px] font-bold text-slate-500 mb-1">Dari Satuan:</label>
+                            <select id="sim-from" onchange="runSimulator()" class="w-full px-3 py-2.5 border-2 border-slate-300 rounded-xl font-bold text-slate-800 focus:border-teal-600 focus:outline-none bg-white">
+                                <option value="kl">kl (Kiloliter)</option>
+                                <option value="hl">hl (Hektoliter)</option>
+                                <option value="dal">dal (Dekaliter)</option>
+                                <option value="l" selected>l (Liter)</option>
+                                <option value="dl">dl (Desiliter)</option>
+                                <option value="cl">cl (Sentiliter)</option>
+                                <option value="ml">ml (Mililiter)</option>
+                                <option value="m3">m³ (Meter kubik)</option>
+                                <option value="dm3">dm³ (Desimeter kubik)</option>
+                                <option value="cm3">cm³ / cc</option>
+                            </select>
+                        </div>
+                        <div class="md:col-span-1 text-center font-extrabold text-teal-600 text-xl pt-4">➡️</div>
+                        <div class="md:col-span-5">
+                            <label class="block text-[11px] font-bold text-slate-500 mb-1">Ubah ke Satuan:</label>
+                            <select id="sim-to" onchange="runSimulator()" class="w-full px-3 py-2.5 border-2 border-slate-300 rounded-xl font-bold text-slate-800 focus:border-teal-600 focus:outline-none bg-white">
+                                <option value="kl">kl (Kiloliter)</option>
+                                <option value="hl">hl (Hektoliter)</option>
+                                <option value="dal">dal (Dekaliter)</option>
+                                <option value="l">l (Liter)</option>
+                                <option value="dl">dl (Desiliter)</option>
+                                <option value="cl">cl (Sentiliter)</option>
+                                <option value="ml" selected>ml (Mililiter)</option>
+                                <option value="m3">m³ (Meter kubik)</option>
+                                <option value="dm3">dm³ (Desimeter kubik)</option>
+                                <option value="cm3">cm³ / cc</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="sim-result-box" class="bg-white p-4 rounded-xl border border-teal-200 text-sm space-y-1.5">
+                        <!-- Diisi otomatis oleh JS -->
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-between items-center">
+                    <button onclick="switchTab('aplikasi')" class="text-slate-500 text-xs font-bold hover:text-slate-800">← Kembali</button>
+                    <button onclick="switchTab('contoh')" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-xl shadow-md transition-all text-sm">
+                        Lanjut ke Contoh Soal Lengkap 💡
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 5: CONTOH SOAL & PEMBAHASAN            -->
+        <!-- ========================================== -->
+        <section id="contoh" class="tab-content space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-8">
+                <div>
+                    <span class="inline-block bg-indigo-100 text-indigo-800 text-xs font-extrabold px-3 py-1 rounded-full mb-2">Belajar dari Contoh</span>
+                    <h2 class="text-2xl font-extrabold text-slate-900">Contoh Soal Langsung & Soal Cerita 💡</h2>
+                    <p class="text-slate-600 text-sm mt-1">Pelajari cara berpikir langkah demi langkah untuk menyelesaikan dua tipe soal yang sering keluar di ujian!</p>
+                </div>
+
+                <!-- KATEGORI 1: CONTOH SOAL LANGSUNG -->
+                <div class="space-y-4">
+                    <h3 class="font-extrabold text-teal-800 text-lg border-b-2 border-teal-100 pb-2">Bagian A: Contoh Soal Langsung (Konversi Langsung)</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Contoh Langsung 1 -->
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                            <span class="bg-teal-100 text-teal-800 text-[11px] font-extrabold px-2.5 py-1 rounded-md">Contoh 1 • Tangga Liter (Turun)</span>
+                            <p class="font-bold text-slate-900 text-base">4,5 Liter = ... ml</p>
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-1.5">
+                                <p><strong>1. Cek arah tangga:</strong> Dari <strong>l</strong> ke <strong>ml</strong> turun <strong>3 tangga</strong> (dl → cl → ml).</p>
+                                <p><strong>2. Operasi hitung:</strong> Turun 3 tangga berarti dikali <strong>1.000</strong>.</p>
+                                <p><strong>3. Hitung:</strong> 4,5 × 1.000 (geser koma ke kanan 1 langkah jadi 45, lalu tambah dua nol).</p>
+                                <p class="text-teal-700 font-extrabold text-sm pt-1">✅ Jawaban: 4.500 ml</p>
+                            </div>
+                        </div>
+
+                        <!-- Contoh Langsung 2 -->
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3">
+                            <span class="bg-indigo-100 text-indigo-800 text-[11px] font-extrabold px-2.5 py-1 rounded-md">Contoh 2 • Tangga Kubik (Naik)</span>
+                            <p class="font-bold text-slate-900 text-base">8.000 dm³ = ... m³</p>
+                            <div class="bg-white p-3.5 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-1.5">
+                                <p><strong>1. Cek arah tangga:</strong> Dari <strong>dm³</strong> ke <strong>m³</strong> naik <strong>1 tangga</strong>.</p>
+                                <p><strong>2. Operasi hitung:</strong> Karena ada pangkat kubik (³), naik 1 tangga dibagi <strong>1.000</strong>.</p>
+                                <p><strong>3. Hitung:</strong> 8.000 ÷ 1.000 (coret 3 angka nol).</p>
+                                <p class="text-indigo-700 font-extrabold text-sm pt-1">✅ Jawaban: 8 m³</p>
+                            </div>
+                        </div>
+
+                        <!-- Contoh Langsung 3 -->
+                        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3 md:col-span-2">
+                            <span class="bg-amber-100 text-amber-800 text-[11px] font-extrabold px-2.5 py-1 rounded-md">Contoh 3 • Campuran Jembatan Penghubung</span>
+                            <p class="font-bold text-slate-900 text-base">2 m³ + 500 dm³ = ... Liter</p>
+                            <div class="bg-white p-4 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-2">
+                                <p><strong>Ingat Aturan Emas:</strong> Semua satuan harus diubah menjadi <strong>Liter</strong> terlebih dahulu sebelum dijumlahkan!</p>
+                                <ul class="list-disc list-inside space-y-1 pl-2">
+                                    <li><strong>Ubah 2 m³ ke Liter:</strong> Dari m³ turun 1 tangga ke dm³ = 2 × 1.000 = <strong>2.000 dm³</strong>. Karena 1 dm³ = 1 Liter, maka 2.000 dm³ = <strong>2.000 Liter</strong>.</li>
+                                    <li><strong>Ubah 500 dm³ ke Liter:</strong> Ingat jembatan utama <em>1 dm³ = 1 Liter</em>, jadi 500 dm³ = <strong>500 Liter</strong>.</li>
+                                </ul>
+                                <p class="text-amber-800 font-extrabold text-sm pt-1">✅ Total Akhir: 2.000 Liter + 500 Liter = 2.500 Liter</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KATEGORI 2: CONTOH SOAL CERITA -->
+                <div class="space-y-4 pt-2">
+                    <h3 class="font-extrabold text-purple-800 text-lg border-b-2 border-purple-100 pb-2">Bagian B: Contoh Soal Cerita (Strategi 3 Langkah: Diket - Ditanya - Jawab)</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <!-- Contoh Cerita 1 -->
+                        <div class="bg-purple-50/60 p-5 rounded-2xl border border-purple-200 space-y-3">
+                            <span class="bg-purple-600 text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md">Soal Cerita 1 • Menuang Minuman</span>
+                            <p class="font-semibold text-slate-800 text-xs md:text-sm leading-relaxed bg-white p-3.5 rounded-xl border border-purple-100">
+                                "Ibu membuat <strong>3 Liter</strong> teh manis di dalam teko besar. Teh tersebut akan dituangkan ke dalam gelas-gelas kecil yang masing-masing berisi <strong>250 ml</strong>. Berapa banyak gelas yang dibutuhkan Ibu?"
+                            </p>
+                            <div class="bg-white p-3.5 rounded-xl border border-purple-200 text-xs text-slate-700 space-y-1.5">
+                                <p><strong class="text-purple-700">Langkah 1 (Samakan Satuan ke ml):</strong><br>
+                                Teh di teko = 3 Liter = 3 × 1.000 = <strong>3.000 ml</strong>.</p>
+                                <p><strong class="text-purple-700">Langkah 2 (Tentukan Operasi):</strong><br>
+                                Karena dibagi ke gelas kecil, maka kita <strong>bagi</strong> total teh dengan isi 1 gelas.</p>
+                                <p><strong class="text-purple-700">Langkah 3 (Hitung):</strong><br>
+                                3.000 ml ÷ 250 ml = <strong>12 gelas</strong>.</p>
+                            </div>
+                        </div>
+
+                        <!-- Contoh Cerita 2 -->
+                        <div class="bg-rose-50/60 p-5 rounded-2xl border border-rose-200 space-y-3">
+                            <span class="bg-rose-600 text-white text-[11px] font-extrabold px-2.5 py-1 rounded-md">Soal Cerita 2 • Mengisi Bak Air</span>
+                            <p class="font-semibold text-slate-800 text-xs md:text-sm leading-relaxed bg-white p-3.5 rounded-xl border border-rose-100">
+                                "Sebuah akuarium mempunyai kapasitas air <strong>40 dm³</strong>. Akuarium itu baru terisi air sebanyak <strong>15.000 cm³</strong>. Berapa <strong>Liter</strong> air lagi yang harus ditambahkan agar akuarium penuh?"
+                            </p>
+                            <div class="bg-white p-3.5 rounded-xl border border-rose-200 text-xs text-slate-700 space-y-1.5">
+                                <p><strong class="text-rose-700">Langkah 1 (Ubah Semua ke Liter):</strong><br>
+                                • Kapasitas penuh = 40 dm³ = <strong>40 Liter</strong> (karena 1 dm³ = 1 Liter).<br>
+                                • Air yang sudah ada = 15.000 cm³ = 15.000 ml = 15.000 ÷ 1.000 = <strong>15 Liter</strong>.</p>
+                                <p><strong class="text-rose-700">Langkah 2 (Hitung Kekurangannya):</strong><br>
+                                40 Liter - 15 Liter = <strong>25 Liter</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-between items-center">
+                    <button onclick="switchTab('materi')" class="text-slate-500 text-xs font-bold hover:text-slate-800">← Kembali</button>
+                    <button onclick="switchTab('latihan')" class="bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-3 rounded-xl shadow-md transition-all text-sm">
+                        Mulai Latihan Soal Terbimbing ✍️
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- TAB 6: LATIHAN SOAL TERBIMBING             -->
+        <!-- ========================================== -->
+        <section id="latihan" class="tab-content space-y-6">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-slate-200 space-y-6">
+                
+                <!-- Header & Score -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-200 pb-5">
+                    <div>
+                        <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-extrabold px-3 py-1 rounded-full mb-2">Praktik Step-by-Step</span>
+                        <h2 class="text-2xl font-extrabold text-slate-900">Latihan Soal Terbimbing ✍️</h2>
+                        <p class="text-slate-600 text-sm">Isi kotak-kotak petunjuk secara bertahap agar kamu paham prosesnya, bukan sekadar menebak jawaban akhir!</p>
+                    </div>
+                    <div class="bg-slate-900 text-white px-5 py-3 rounded-2xl text-center shadow-sm">
+                        <div class="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Total Poin Terkumpul</div>
+                        <div class="text-xl font-extrabold text-teal-400"><span id="guided-score">0</span> / 6 Soal</div>
+                    </div>
+                </div>
+
+                <!-- Cheat Sheet Mini Toggle -->
+                <div class="bg-amber-50 border border-amber-200 rounded-2xl p-4">
+                    <button onclick="toggleCheatSheet()" class="w-full flex justify-between items-center text-left font-extrabold text-amber-900 text-xs md:text-sm">
+                        <span>🆘 Butuh Bantuan? Klik di sini untuk membuka Catatan Tangga & Jembatan!</span>
+                        <span id="cheat-arrow">▼</span>
+                    </button>
+                    <div id="cheat-sheet-content" class="hidden mt-3 pt-3 border-t border-amber-200 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs text-slate-700">
+                        <div class="bg-white p-3 rounded-xl border border-amber-100">
+                            <strong class="text-teal-700 block mb-1">Urutan Tangga:</strong>
+                            kl → hl → dal → <strong>l</strong> → dl → cl → ml<br>
+                            <em>(Turun 1 = ×10, Naik 1 = ÷10)</em>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-amber-100">
+                            <strong class="text-indigo-700 block mb-1">Urutan Kubik (³):</strong>
+                            km³ → hm³ → dam³ → <strong>m³</strong> → dm³ → cm³ → mm³<br>
+                            <em>(Turun 1 = ×1.000, Naik 1 = ÷1.000)</em>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-amber-100">
+                            <strong class="text-amber-700 block mb-1">Jembatan Penghubung:</strong>
+                            • 1 m³ = 1.000 Liter<br>
+                            • <strong>1 dm³ = 1 Liter</strong><br>
+                            • <strong>1 cm³ = 1 ml = 1 cc</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BAGIAN 1: 3 SOAL KONVERSI LANGSUNG TERBIMBING -->
+                <div class="space-y-4">
+                    <h3 class="font-extrabold text-teal-800 text-base uppercase tracking-wide">Bagian 1: Soal Konversi Langsung</h3>
+
+                    <!-- Soal Terbimbing 1 -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3" id="card-g1">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-extrabold bg-teal-600 text-white px-2.5 py-1 rounded-lg">Soal 1</span>
+                            <span id="badge-g1" class="text-xs font-bold text-slate-400">Belum Selesai</span>
+                        </div>
+                        <p class="font-extrabold text-slate-900 text-base">Ubahlah: 7 hl (Hektoliter) = ... Liter</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-white p-4 rounded-xl border border-slate-200 text-xs">
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 1: Dari hl ke Liter turun berapa tangga?</label>
+                                <select id="g1-step1" class="w-full p-2 border border-slate-300 rounded-lg font-bold">
+                                    <option value="">-- Pilih --</option>
+                                    <option value="1">Turun 1 tangga (× 10)</option>
+                                    <option value="2">Turun 2 tangga (× 100)</option>
+                                    <option value="3">Turun 3 tangga (× 1.000)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 2: Jadi, hasil akhirnya (7 × ...) adalah:</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="number" id="g1-ans" placeholder="Jawaban" class="w-full p-2 border border-slate-300 rounded-lg font-extrabold">
+                                    <span class="font-bold">Liter</span>
+                                </div>
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="checkGuided1()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2.5 px-4 rounded-lg transition-all">Periksa Jawaban</button>
+                            </div>
+                        </div>
+                        <div id="fb-g1" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+                    </div>
+
+                    <!-- Soal Terbimbing 2 -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3" id="card-g2">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-extrabold bg-teal-600 text-white px-2.5 py-1 rounded-lg">Soal 2</span>
+                            <span id="badge-g2" class="text-xs font-bold text-slate-400">Belum Selesai</span>
+                        </div>
+                        <p class="font-extrabold text-slate-900 text-base">Ubahlah: 12.000 cm³ = ... Liter</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-white p-4 rounded-xl border border-slate-200 text-xs">
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 1: Ingat 1 cm³ = 1 ml. Jadi 12.000 cm³ = ... ml?</label>
+                                <input type="number" id="g2-step1" placeholder="Isi dalam ml" class="w-full p-2 border border-slate-300 rounded-lg font-bold">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 2: Ubah ml ke Liter (naik 3 tangga = ÷ 1.000):</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="number" id="g2-ans" placeholder="Hasil Liter" class="w-full p-2 border border-slate-300 rounded-lg font-extrabold">
+                                    <span class="font-bold">Liter</span>
+                                </div>
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="checkGuided2()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2.5 px-4 rounded-lg transition-all">Periksa Jawaban</button>
+                            </div>
+                        </div>
+                        <div id="fb-g2" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+                    </div>
+
+                    <!-- Soal Terbimbing 3 -->
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-3" id="card-g3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-extrabold bg-teal-600 text-white px-2.5 py-1 rounded-lg">Soal 3 (Operasi Campuran)</span>
+                            <span id="badge-g3" class="text-xs font-bold text-slate-400">Belum Selesai</span>
+                        </div>
+                        <p class="font-extrabold text-slate-900 text-base">Hitunglah: 3 m³ + 400 Liter = ... Liter</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-white p-4 rounded-xl border border-slate-200 text-xs">
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 1: Ubah dulu 3 m³ ke Liter (3 × 1.000):</label>
+                                <input type="number" id="g3-step1" placeholder="Hasil dalam Liter" class="w-full p-2 border border-slate-300 rounded-lg font-bold">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 2: Jumlahkan hasilnya dengan 400 Liter:</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="number" id="g3-ans" placeholder="Total Liter" class="w-full p-2 border border-slate-300 rounded-lg font-extrabold">
+                                    <span class="font-bold">Liter</span>
+                                </div>
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="checkGuided3()" class="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-2.5 px-4 rounded-lg transition-all">Periksa Jawaban</button>
+                            </div>
+                        </div>
+                        <div id="fb-g3" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+                    </div>
+                </div>
+
+                <!-- BAGIAN 2: 3 SOAL CERITA TERBIMBING -->
+                <div class="space-y-4 pt-4">
+                    <h3 class="font-extrabold text-purple-800 text-base uppercase tracking-wide">Bagian 2: Soal Cerita Terbimbing</h3>
+
+                    <!-- Soal Cerita 4 -->
+                    <div class="bg-purple-50/50 p-5 rounded-2xl border border-purple-200 space-y-3" id="card-g4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-extrabold bg-purple-600 text-white px-2.5 py-1 rounded-lg">Soal Cerita 4 • Sirup Obat</span>
+                            <span id="badge-g4" class="text-xs font-bold text-slate-400">Belum Selesai</span>
+                        </div>
+                        <p class="font-semibold text-slate-800 text-xs md:text-sm bg-white p-3.5 rounded-xl border border-purple-100 leading-relaxed">
+                            "Sinta membeli 1 botol sirup rasa jeruk berukuran <strong>1,5 Liter</strong>. Ia menuangkan sirup itu ke dalam botol kecil berukuran <strong>500 ml</strong> untuk diberikan kepada adiknya. Berapa <strong>ml</strong> sisa sirup Sinta sekarang?"
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-white p-4 rounded-xl border border-purple-200 text-xs">
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 1: Ubah sirup awal 1,5 Liter ke ml (× 1.000):</label>
+                                <input type="number" id="g4-step1" placeholder="Isi dalam ml" class="w-full p-2 border border-slate-300 rounded-lg font-bold">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 2: Kurangi dengan 500 ml untuk adik:</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="number" id="g4-ans" placeholder="Sisa (ml)" class="w-full p-2 border border-slate-300 rounded-lg font-extrabold">
+                                    <span class="font-bold">ml</span>
+                                </div>
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="checkGuided4()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-4 rounded-lg transition-all">Periksa Jawaban</button>
+                            </div>
+                        </div>
+                        <div id="fb-g4" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+                    </div>
+
+                    <!-- Soal Cerita 5 -->
+                    <div class="bg-purple-50/50 p-5 rounded-2xl border border-purple-200 space-y-3" id="card-g5">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-extrabold bg-purple-600 text-white px-2.5 py-1 rounded-lg">Soal Cerita 5 • Membagi Jus Mangga</span>
+                            <span id="badge-g5" class="text-xs font-bold text-slate-400">Belum Selesai</span>
+                        </div>
+                        <p class="font-semibold text-slate-800 text-xs md:text-sm bg-white p-3.5 rounded-xl border border-purple-100 leading-relaxed">
+                            "Bibi membuat <strong>4 Liter</strong> jus mangga segar. Jus tersebut akan dimasukkan ke dalam gelas kemasan berukuran <strong>200 ml</strong> untuk dibagikan ke teman-teman Budi. Berapa <strong>gelas</strong> yang terisi penuh?"
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-white p-4 rounded-xl border border-purple-200 text-xs">
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 1: Ubah total jus 4 Liter ke ml (× 1.000):</label>
+                                <input type="number" id="g5-step1" placeholder="Total jus (ml)" class="w-full p-2 border border-slate-300 rounded-lg font-bold">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 2: Bagi total jus (ml) dengan 200 ml:</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="number" id="g5-ans" placeholder="Jumlah gelas" class="w-full p-2 border border-slate-300 rounded-lg font-extrabold">
+                                    <span class="font-bold">gelas</span>
+                                </div>
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="checkGuided5()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-4 rounded-lg transition-all">Periksa Jawaban</button>
+                            </div>
+                        </div>
+                        <div id="fb-g5" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+                    </div>
+
+                    <!-- Soal Cerita 6 -->
+                    <div class="bg-purple-50/50 p-5 rounded-2xl border border-purple-200 space-y-3" id="card-g6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs font-extrabold bg-purple-600 text-white px-2.5 py-1 rounded-lg">Soal Cerita 6 • Tangki Air & Jembatan Kubik</span>
+                            <span id="badge-g6" class="text-xs font-bold text-slate-400">Belum Selesai</span>
+                        </div>
+                        <p class="font-semibold text-slate-800 text-xs md:text-sm bg-white p-3.5 rounded-xl border border-purple-100 leading-relaxed">
+                            "Sebuah bak mandi berbentuk balok mampu menampung air sebanyak <strong>250 dm³</strong>. Ayah sudah mengisi bak mandi itu dengan <strong>120 Liter</strong> air. Berapa <strong>Liter</strong> air lagi yang dibutuhkan agar bak mandi terisi penuh?"
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 bg-white p-4 rounded-xl border border-purple-200 text-xs">
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 1: Ingat 1 dm³ = 1 Liter. Jadi 250 dm³ = ... Liter?</label>
+                                <input type="number" id="g6-step1" placeholder="Kapasitas (Liter)" class="w-full p-2 border border-slate-300 rounded-lg font-bold">
+                            </div>
+                            <div>
+                                <label class="block font-bold text-slate-600 mb-1">Langkah 2: Kurangi kapasitas penuh dengan 120 Liter:</label>
+                                <div class="flex items-center gap-2">
+                                    <input type="number" id="g6-ans" placeholder="Kekurangan (Liter)" class="w-full p-2 border border-slate-300 rounded-lg font-extrabold">
+                                    <span class="font-bold">Liter</span>
+                                </div>
+                            </div>
+                            <div class="flex items-end">
+                                <button onclick="checkGuided6()" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 px-4 rounded-lg transition-all">Periksa Jawaban</button>
+                            </div>
+                        </div>
+                        <div id="fb-g6" class="hidden text-xs font-bold p-3 rounded-xl"></div>
+                    </div>
+                </div>
+
+                <!-- Banner Selesai -->
+                <div id="completion-banner" class="hidden bg-gradient-to-r from-emerald-500 to-teal-600 text-white p-6 rounded-2xl text-center space-y-2 shadow-lg">
+                    <div class="text-4xl">🏆🎉</div>
+                    <h3 class="text-xl font-extrabold">Luar Biasa! Kamu Sudah Menguasai Konversi Satuan Volume!</h3>
+                    <p class="text-xs md:text-sm text-emerald-50">Semua latihan soal langsung dan soal cerita telah kamu selesaikan dengan sangat baik.</p>
+                </div>
+
+                <div class="mt-6 flex justify-between items-center">
+                    <button onclick="switchTab('contoh')" class="text-slate-500 text-xs font-bold hover:text-slate-800">← Kembali ke Contoh Soal</button>
+                    <button onclick="resetAllExercises()" class="text-xs font-bold text-rose-600 hover:underline">🔄 Ulangi Latihan dari Awal</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-5 mt-12 text-center text-xs text-slate-500">
+        <p>Modul Interaktif Matematika • Konversi Satuan Volume (Liter & Kubik)</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // ==========================================
+        // 1. NAVIGASI TAB
+        // ==========================================
+        function switchTab(targetId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-teal-700', 'shadow');
+                btn.classList.add('text-white', 'hover:bg-white/15');
+            });
+
+            document.getElementById(targetId).classList.add('active');
+            const activeBtn = document.querySelector(`button[data-target="${targetId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-white', 'hover:bg-white/15');
+                activeBtn.classList.add('bg-white', 'text-teal-700', 'shadow');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // ==========================================
+        // 2. LOGIKA WARM-UP (4 SOAL)
+        // ==========================================
+        let warmupScore = 0;
+        const warmupAnswered = {};
+
+        function checkWarmup(qNum, btn) {
+            if (warmupAnswered[qNum]) return;
+            warmupAnswered[qNum] = true;
+
+            const card = btn.closest('.warmup-card');
+            const buttons = card.querySelectorAll('button');
+            const feedback = card.querySelector('.feedback-box');
+            const isCorrect = btn.getAttribute('data-correct') === 'true';
+
+            buttons.forEach(b => {
+                b.disabled = true;
+                if (b.getAttribute('data-correct') === 'true') {
+                    b.classList.add('bg-emerald-50', 'border-emerald-500', 'text-emerald-900');
+                }
+            });
+
+            feedback.classList.remove('hidden');
+            if (isCorrect) {
+                warmupScore++;
+                btn.classList.add('bg-emerald-100', 'border-emerald-600');
+                feedback.className = 'feedback-box mt-3 p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800';
+                feedback.textContent = '✅ Tepat sekali! Logika hitunganmu sudah siap.';
+            } else {
+                btn.classList.add('bg-rose-100', 'border-rose-500', 'text-rose-900');
+                feedback.className = 'feedback-box mt-3 p-3 rounded-xl text-xs font-bold bg-rose-100 text-rose-800';
+                feedback.textContent = '❌ Kurang tepat. Perhatikan jawaban hijau di atas untuk penjelasannya!';
+            }
+
+            document.getElementById('warmup-score').textContent = warmupScore;
+        }
+
+        // ==========================================
+        // 3. SIMULATOR KONVERSI INTERAKTIF
+        // ==========================================
+        // Semua nilai dikonversi ke basis standar: 1 Liter = 1.000 ml
+        const toLiterFactor = {
+            'kl': 1000,
+            'hl': 100,
+            'dal': 10,
+            'l': 1,
+            'dl': 0.1,
+            'cl': 0.01,
+            'ml': 0.001,
+            'm3': 1000,    // 1 m3 = 1.000 dm3 = 1.000 Liter
+            'dm3': 1,      // 1 dm3 = 1 Liter
+            'cm3': 0.001   // 1 cm3 = 1 ml = 0.001 Liter
+        };
+
+        const unitNames = {
+            'kl': 'Kiloliter (kl)',
+            'hl': 'Hektoliter (hl)',
+            'dal': 'Dekaliter (dal)',
+            'l': 'Liter (l)',
+            'dl': 'Desiliter (dl)',
+            'cl': 'Sentiliter (cl)',
+            'ml': 'Mililiter (ml)',
+            'm3': 'Meter Kubik (m³)',
+            'dm3': 'Desimeter Kubik (dm³)',
+            'cm3': 'Sentimeter Kubik (cm³ / cc)'
+        };
+
+        function runSimulator() {
+            const val = parseFloat(document.getElementById('sim-input').value);
+            const from = document.getElementById('sim-from').value;
+            const to = document.getElementById('sim-to').value;
+            const box = document.getElementById('sim-result-box');
+
+            if (isNaN(val)) {
+                box.innerHTML = `<p class="text-amber-700 font-bold">⚠️ Silakan ketik angka terlebih dahulu pada kotak di atas.</p>`;
+                return;
+            }
+
+            const inLiters = val * toLiterFactor[from];
+            const result = inLiters / toLiterFactor[to];
+            // Format angka agar rapi tanpa floating point error
+            const formattedResult = Number(result.toPrecision(10)).toLocaleString('id-ID', { maximumFractionDigits: 6 });
+            const formattedInput = val.toLocaleString('id-ID', { maximumFractionDigits: 6 });
+
+            const multiplier = toLiterFactor[from] / toLiterFactor[to];
+            let explanation = '';
+            if (multiplier === 1) {
+                explanation = `Satuan <strong>${unitNames[from]}</strong> dan <strong>${unitNames[to]}</strong> memiliki nilai yang <strong>sama persis</strong> (dikali 1).`;
+            } else if (multiplier > 1) {
+                explanation = `Karena posisi satuan tujuan lebih rendah/kecil, kita kalikan dengan <strong>${multiplier.toLocaleString('id-ID')}</strong>.`;
+            } else {
+                const divisor = Math.round(1 / multiplier);
+                explanation = `Karena posisi satuan tujuan lebih tinggi/besar, kita bagi dengan <strong>${divisor.toLocaleString('id-ID')}</strong>.`;
+            }
+
+            box.innerHTML = `
+                <div class="text-base md:text-lg font-extrabold text-teal-800">
+                    Hasil: ${formattedInput} ${from} = <span class="bg-teal-100 px-2.5 py-0.5 rounded-lg text-teal-950">${formattedResult} ${to}</span>
+                </div>
+                <p class="text-xs text-slate-600">💡 <strong>Cara kerjanya:</strong> ${explanation}</p>
+            `;
+        }
+
+        // Jalankan simulator saat halaman pertama kali dibuka
+        window.onload = function() {
+            runSimulator();
+        };
+
+        // ==========================================
+        // 4. CHEAT SHEET TOGGLE & LATIHAN TERBIMBING
+        // ==========================================
+        function toggleCheatSheet() {
+            const content = document.getElementById('cheat-sheet-content');
+            const arrow = document.getElementById('cheat-arrow');
+            content.classList.toggle('hidden');
+            arrow.textContent = content.classList.contains('hidden') ? '▼' : '▲';
+        }
+
+        const guidedCompleted = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
+
+        function updateGuidedScore(num, isSuccess, msg) {
+            const fb = document.getElementById(`fb-g${num}`);
+            const badge = document.getElementById(`badge-g${num}`);
+            fb.classList.remove('hidden');
+
+            if (isSuccess) {
+                fb.className = 'text-xs font-bold p-3 rounded-xl bg-emerald-100 text-emerald-800 border border-emerald-300';
+                fb.innerHTML = `✅ ${msg}`;
+                badge.textContent = 'Selesai ✓';
+                badge.className = 'text-xs font-extrabold text-emerald-600 bg-emerald-100 px-2.5 py-0.5 rounded-full';
+                
+                if (!guidedCompleted[num]) {
+                    guidedCompleted[num] = true;
+                    const total = Object.values(guidedCompleted).filter(Boolean).length;
+                    document.getElementById('guided-score').textContent = total;
+                    if (total === 6) {
+                        document.getElementById('completion-banner').classList.remove('hidden');
+                    }
+                }
+            } else {
+                fb.className = 'text-xs font-bold p-3 rounded-xl bg-rose-100 text-rose-800 border border-rose-300';
+                fb.innerHTML = `⚠️ ${msg}`;
+            }
+        }
+
+        // Validasi Soal 1: 7 hl = 700 Liter (turun 2 tangga)
+        function checkGuided1() {
+            const s1 = document.getElementById('g1-step1').value;
+            const ans = parseFloat(document.getElementById('g1-ans').value);
+
+            if (s1 !== '2') {
+                updateGuidedScore(1, false, 'Cek Langkah 1: Dari hl ke Liter melewati dal lalu ke l. Berarti turun 2 tangga (× 100)!');
+                return;
+            }
+            if (ans !== 700) {
+                updateGuidedScore(1, false, 'Langkah 1 sudah benar! Sekarang hitung Langkah 2: 7 × 100 = ...?');
+                return;
+            }
+            updateGuidedScore(1, true, 'Hebat! Turun 2 tangga artinya 7 × 100 = 700 Liter.');
+        }
+
+        // Validasi Soal 2: 12.000 cm³ = 12.000 ml = 12 Liter
+        function checkGuided2() {
+            const s1 = parseFloat(document.getElementById('g2-step1').value);
+            const ans = parseFloat(document.getElementById('g2-ans').value);
+
+            if (s1 !== 12000) {
+                updateGuidedScore(2, false, 'Cek Langkah 1: Ingat jembatan 1 cm³ = 1 ml. Jadi 12.000 cm³ tetap 12.000 ml.');
+                return;
+            }
+            if (ans !== 12) {
+                updateGuidedScore(2, false, 'Langkah 1 benar! Sekarang hitung Langkah 2: 12.000 ml ÷ 1.000 = ... Liter?');
+                return;
+            }
+            updateGuidedScore(2, true, 'Sempurna! 12.000 cm³ = 12.000 ml, lalu dibagi 1.000 menjadi 12 Liter.');
+        }
+
+        // Validasi Soal 3: 3 m³ + 400 Liter = 3.000 + 400 = 3.400 Liter
+        function checkGuided3() {
+            const s1 = parseFloat(document.getElementById('g3-step1').value);
+            const ans = parseFloat(document.getElementById('g3-ans').value);
+
+            if (s1 !== 3000) {
+                updateGuidedScore(3, false, 'Cek Langkah 1: Ingat 1 m³ = 1.000 Liter. Jadi 3 m³ = 3 × 1.000 = 3.000 Liter.');
+                return;
+            }
+            if (ans !== 3400) {
+                updateGuidedScore(3, false, 'Langkah 1 benar! Sekarang jumlahkan: 3.000 Liter + 400 Liter = ...?');
+                return;
+            }
+            updateGuidedScore(3, true, 'Mantap! Setelah satuannya sama-sama Liter, 3.000 + 400 = 3.400 Liter.');
+        }
+
+        // Validasi Soal Cerita 4: 1,5 Liter = 1.500 ml -> 1.500 - 500 = 1.000 ml
+        function checkGuided4() {
+            const s1 = parseFloat(document.getElementById('g4-step1').value);
+            const ans = parseFloat(document.getElementById('g4-ans').value);
+
+            if (s1 !== 1500) {
+                updateGuidedScore(4, false, 'Cek Langkah 1: 1,5 Liter turun 3 tangga ke ml → 1,5 × 1.000 = 1.500 ml.');
+                return;
+            }
+            if (ans !== 1000) {
+                updateGuidedScore(4, false, 'Langkah 1 tepat! Sekarang hitung sisa sirup: 1.500 ml - 500 ml = ...?');
+                return;
+            }
+            updateGuidedScore(4, true, 'Benar sekali! Sisa sirup Sinta adalah 1.500 ml - 500 ml = 1.000 ml.');
+        }
+
+        // Validasi Soal Cerita 5: 4 Liter = 4.000 ml -> 4.000 ÷ 200 = 20 gelas
+        function checkGuided5() {
+            const s1 = parseFloat(document.getElementById('g5-step1').value);
+            const ans = parseFloat(document.getElementById('g5-ans').value);
+
+            if (s1 !== 4000) {
+                updateGuidedScore(5, false, 'Cek Langkah 1: Ubah dulu 4 Liter ke ml (4 × 1.000 = 4.000 ml).');
+                return;
+            }
+            if (ans !== 20) {
+                updateGuidedScore(5, false, 'Langkah 1 tepat! Sekarang bagi 4.000 ml ÷ 200 ml = ... gelas?');
+                return;
+            }
+            updateGuidedScore(5, true, 'Keren! 4.000 ml dibagi 200 ml menghasilkan tepat 20 gelas jus.');
+        }
+
+        // Validasi Soal Cerita 6: 250 dm³ = 250 Liter -> 250 - 120 = 130 Liter
+        function checkGuided6() {
+            const s1 = parseFloat(document.getElementById('g6-step1').value);
+            const ans = parseFloat(document.getElementById('g6-ans').value);
+
+            if (s1 !== 250) {
+                updateGuidedScore(6, false, 'Cek Langkah 1: Ingat jembatan utama 1 dm³ = 1 Liter. Jadi 250 dm³ = 250 Liter.');
+                return;
+            }
+            if (ans !== 130) {
+                updateGuidedScore(6, false, 'Langkah 1 tepat! Sekarang kurangi 250 Liter - 120 Liter = ...?');
+                return;
+            }
+            updateGuidedScore(6, true, 'Luar biasa! Air yang dibutuhkan lagi adalah 250 - 120 = 130 Liter.');
+        }
+
+        function resetAllExercises() {
+            for (let i = 1; i <= 6; i++) {
+                guidedCompleted[i] = false;
+                document.getElementById(`g${i}-step1`).value = '';
+                document.getElementById(`g${i}-ans`).value = '';
+                document.getElementById(`fb-g${i}`).classList.add('hidden');
+                const badge = document.getElementById(`badge-g${i}`);
+                badge.textContent = 'Belum Selesai';
+                badge.className = 'text-xs font-bold text-slate-400';
+            }
+            document.getElementById('guided-score').textContent = '0';
+            document.getElementById('completion-banner').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
