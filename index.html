@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Interaktif 25 Soal - Konversi Satuan Volume</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .fade-in { animation: fadeIn 0.25s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Top Header -->
+    <header class="bg-gradient-to-r from-indigo-700 via-blue-700 to-teal-600 text-white shadow-md sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-3.5 flex flex-wrap justify-between items-center gap-3">
+            <div class="flex items-center gap-3">
+                <div class="bg-white/20 p-2 rounded-xl text-2xl backdrop-blur-sm">📝</div>
+                <div>
+                    <h1 class="text-base md:text-lg font-extrabold tracking-tight">Kuis Latihan Terbimbing: Konversi Volume</h1>
+                    <div class="flex items-center gap-2 text-[11px] text-blue-100">
+                        <span class="inline-flex items-center gap-1 bg-emerald-500/30 border border-emerald-300/40 px-2 py-0.5 rounded-full text-emerald-100 font-semibold">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-300 animate-pulse"></span> Tersimpan Otomatis (Aman jika Reload)
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Score & Progress -->
+            <div class="flex items-center gap-3">
+                <div class="bg-white/15 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-white/20 text-right">
+                    <div class="text-[10px] uppercase tracking-wider text-blue-100 font-bold">Skor Benar</div>
+                    <div class="text-sm md:text-base font-extrabold text-amber-300"><span id="header-score">0</span> / 25</div>
+                </div>
+                <button onclick="openResetModal()" class="bg-rose-500/90 hover:bg-rose-600 text-white text-xs font-bold px-3 py-2.5 rounded-xl shadow transition-all" title="Ulangi Kuis dari Awal">
+                    🔄 Reset
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Layout -->
+    <main class="flex-grow max-w-6xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+        
+        <!-- Left/Main Area: Active Question Card (8 cols on lg) -->
+        <div class="lg:col-span-8 space-y-4">
+            
+            <!-- Helper Cheat Sheet Accordion -->
+            <div class="bg-amber-50 border border-amber-200 rounded-2xl p-3.5 shadow-sm">
+                <button onclick="toggleCheatSheet()" class="w-full flex justify-between items-center text-left font-extrabold text-amber-900 text-xs">
+                    <span>💡 Butuh Bantuan Rumus Tangga & Jembatan? Klik untuk Buka/Tutup</span>
+                    <span id="cheat-icon" class="bg-amber-200/70 px-2 py-0.5 rounded text-[10px]">Buka ▼</span>
+                </button>
+                <div id="cheat-body" class="hidden mt-3 pt-3 border-t border-amber-200/80 grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-[11px] text-slate-700">
+                    <div class="bg-white p-2.5 rounded-xl border border-amber-100">
+                        <strong class="text-teal-700 block mb-0.5">Tangga Liter (×10 / ÷10):</strong>
+                        kl → hl → dal → <strong>l</strong> → dl → cl → ml
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-amber-100">
+                        <strong class="text-indigo-700 block mb-0.5">Tangga Kubik (×1000 / ÷1000):</strong>
+                        km³ → hm³ → dam³ → <strong>m³</strong> → dm³ → cm³ → mm³
+                    </div>
+                    <div class="bg-white p-2.5 rounded-xl border border-amber-100">
+                        <strong class="text-amber-700 block mb-0.5">Jembatan Penghubung:</strong>
+                        1 m³ = 1.000 l • <strong>1 dm³ = 1 l</strong> • <strong>1 cm³ = 1 ml = 1 cc</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Question Container -->
+            <div id="question-container" class="bg-white rounded-3xl p-5 md:p-7 shadow-sm border border-slate-200 fade-in">
+                <!-- Rendered dynamically by JS -->
+            </div>
+
+            <!-- Prev / Next Navigation Buttons -->
+            <div class="flex justify-between items-center gap-3 pt-1">
+                <button id="btn-prev" onclick="navigateQuestion(-1)" class="flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-xs md:text-sm bg-white border border-slate-300 text-slate-700 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed shadow-sm transition-all">
+                    ← Soal Sebelumnya
+                </button>
+                <span class="text-xs font-bold text-slate-500">Soal <span id="current-num-label">1</span> dari 25</span>
+                <button id="btn-next" onclick="navigateQuestion(1)" class="flex items-center gap-2 px-5 py-3 rounded-xl font-bold text-xs md:text-sm bg-indigo-600 hover:bg-indigo-700 text-white disabled:opacity-40 disabled:cursor-not-allowed shadow-sm transition-all">
+                    Soal Berikutnya →
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Sidebar: Question Navigator Grid (4 cols on lg) -->
+        <aside class="lg:col-span-4 bg-white rounded-3xl p-5 shadow-sm border border-slate-200 space-y-4 sticky top-20">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-3">
+                <h2 class="font-extrabold text-slate-900 text-sm">🧭 Navigasi 25 Soal</h2>
+                <span class="text-xs font-bold text-slate-500"><span id="answered-count">0</span>/25 Dijawab</span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                <div id="progress-bar" class="bg-gradient-to-r from-indigo-500 to-teal-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+
+            <!-- 25 Number Buttons -->
+            <div id="nav-grid" class="grid grid-cols-5 gap-2 pt-1">
+                <!-- Generated by JS -->
+            </div>
+
+            <!-- Legend -->
+            <div class="pt-3 border-t border-slate-100 grid grid-cols-2 gap-2 text-[11px] font-semibold text-slate-600">
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-emerald-500 inline-block"></span> Benar</div>
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-rose-500 inline-block"></span> Salah (Coba Lagi)</div>
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded border-2 border-indigo-600 bg-indigo-50 inline-block"></span> Sedang Dibuka</div>
+                <div class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-slate-100 border border-slate-300 inline-block"></span> Belum Dijawab</div>
+            </div>
+
+            <!-- Summary Action -->
+            <button onclick="showSummaryModal()" class="w-full mt-2 bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl text-xs transition-all shadow-sm">
+                📊 Lihat Rekap Hasil & Nilai Akhir
+            </button>
+        </aside>
+
+    </main>
+
+    <!-- Custom Modal: Reset Confirmation (No browser confirm()) -->
+    <div id="reset-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-6 shadow-xl border border-slate-200 space-y-4 text-center fade-in">
+            <div class="text-4xl">⚠️</div>
+            <h3 class="text-lg font-extrabold text-slate-900">Hapus Semua Jawaban?</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">Semua jawaban yang sudah tersimpan pada 25 soal akan dihapus dan skor kembali menjadi 0.</p>
+            <div class="flex gap-3 pt-2">
+                <button onclick="closeResetModal()" class="flex-1 py-2.5 rounded-xl font-bold text-xs bg-slate-100 hover:bg-slate-200 text-slate-700">Batal</button>
+                <button onclick="confirmResetAll()" class="flex-1 py-2.5 rounded-xl font-bold text-xs bg-rose-600 hover:bg-rose-700 text-white shadow">Ya, Reset Semua</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Modal: Final Summary -->
+    <div id="summary-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 md:p-7 shadow-xl border border-slate-200 space-y-5 text-center fade-in">
+            <div class="text-5xl" id="summary-emoji">🏆</div>
+            <div>
+                <span class="text-xs font-extrabold uppercase tracking-wider text-indigo-600">Rekap Hasil Latihan</span>
+                <h3 class="text-2xl font-extrabold text-slate-900 mt-1">Nilai Kamu: <span id="summary-grade" class="text-teal-600">0</span> / 100</h3>
+            </div>
+            <div class="grid grid-cols-3 gap-2 bg-slate-50 p-3.5 rounded-2xl border border-slate-200 text-xs">
+                <div>
+                    <div class="text-slate-500 font-semibold">Benar</div>
+                    <div id="sum-correct" class="text-base font-extrabold text-emerald-600">0</div>
+                </div>
+                <div>
+                    <div class="text-slate-500 font-semibold">Salah</div>
+                    <div id="sum-wrong" class="text-base font-extrabold text-rose-600">0</div>
+                </div>
+                <div>
+                    <div class="text-slate-500 font-semibold">Kosong</div>
+                    <div id="sum-empty" class="text-base font-extrabold text-slate-700">0</div>
+                </div>
+            </div>
+            <p id="summary-message" class="text-xs text-slate-600 leading-relaxed"></p>
+            <button onclick="closeSummaryModal()" class="w-full py-3 rounded-xl font-bold text-xs bg-indigo-600 hover:bg-indigo-700 text-white shadow">Tutup & Lanjutkan Belajar</button>
+        </div>
+    </div>
+
+    <script>
+        // =========================================================================
+        // DATA 25 SOAL TERBIMBING (LANGKAH 2 TANPA BOCORAN CARA JAWAB)
+        // Soal 1 - 15: Konversi Langsung & Operasi Campuran
+        // Soal 16 - 25: Soal Cerita Kontekstual
+        // =========================================================================
+        const questionsData = [
+            // --- BAGIAN 1: KONVERSI LANGSUNG (1-15) ---
+            {
+                id: 1,
+                category: "Soal Langsung • Tangga Liter",
+                question: "Ubahlah: <strong>9 kl (Kiloliter) = ... Liter</strong>",
+                step1Label: "Langkah 1: Tentukan arah dan jumlah lompatan tangga dari kl ke Liter:",
+                step1Type: "select",
+                step1Options: [
+                    { val: "10", text: "Turun 1 tangga (× 10)" },
+                    { val: "100", text: "Turun 2 tangga (× 100)" },
+                    { val: "1000", text: "Turun 3 tangga (× 1.000)" }
+                ],
+                step1Answer: "1000",
+                step1Hint: "Dari kl melewati hl → dal → l, berarti turun 3 tangga (× 1.000).",
+                step2Label: "Langkah 2: Tuliskan hasil akhirnya:",
+                step2Unit: "Liter",
+                step2Answer: 9000,
+                explanation: "Dari kl ke Liter turun 3 tangga, sehingga 9 × 1.000 = 9.000 Liter."
+            },
+            {
+                id: 2,
+                category: "Soal Langsung • Tangga Liter",
+                question: "Ubahlah: <strong>65 dl (Desiliter) = ... ml (Mililiter)</strong>",
+                step1Label: "Langkah 1: Tentukan arah dan jumlah lompatan tangga dari dl ke ml:",
+                step1Type: "select",
+                step1Options: [
+                    { val: "10", text: "Turun 1 tangga (× 10)" },
+                    { val: "100", text: "Turun 2 tangga (× 100)" },
+                    { val: "1000", text: "Turun 3 tangga (× 1.000)" }
+                ],
+                step1Answer: "100",
+                step1Hint: "Dari dl melewati cl lalu ke ml, berarti turun 2 tangga (× 100).",
+                step2Label: "Langkah 2: Tuliskan hasil akhirnya:",
+                step2Unit: "ml",
+                step2Answer: 6500,
+                explanation: "Dari dl ke ml turun 2 tangga (dl → cl → ml), jadi 65 × 100 = 6.500 ml."
+            },
+            {
+                id: 3,
+                category: "Soal Langsung • Tangga Liter (Naik)",
+                question: "Ubahlah: <strong>4.200 ml = ... dl (Desiliter)</strong>",
+                step1Label: "Langkah 1: Tentukan arah dan jumlah lompatan tangga dari ml ke dl:",
+                step1Type: "select",
+                step1Options: [
+                    { val: "10", text: "Naik 1 tangga (÷ 10)" },
+                    { val: "100", text: "Naik 2 tangga (÷ 100)" },
+                    { val: "1000", text: "Naik 3 tangga (÷ 1.000)" }
+                ],
+                step1Answer: "100",
+                step1Hint: "Dari ml naik melewati cl lalu ke dl, berarti naik 2 tangga (÷ 100).",
+                step2Label: "Langkah 2: Tuliskan hasil akhirnya:",
+                step2Unit: "dl",
+                step2Answer: 42,
+                explanation: "Naik 2 tangga artinya dibagi 100 (coret dua nol): 4.200 ÷ 100 = 42 dl."
+            },
+            {
+                id: 4,
+                category: "Soal Langsung • Angka Desimal",
+                question: "Ubahlah: <strong>3,25 Liter = ... cl (Sentiliter)</strong>",
+                step1Label: "Langkah 1: Tentukan arah dan jumlah lompatan tangga dari Liter (l) ke cl:",
+                step1Type: "select",
+                step1Options: [
+                    { val: "10", text: "Turun 1 tangga (× 10)" },
+                    { val: "100", text: "Turun 2 tangga (× 100)" },
+                    { val: "1000", text: "Turun 3 tangga (× 1.000)" }
+                ],
+                step1Answer: "100",
+                step1Hint: "Dari l ke dl lalu ke cl adalah turun 2 tangga (× 100).",
+                step2Label: "Langkah 2: Tuliskan hasil akhirnya:",
+                step2Unit: "cl",
+                step2Answer: 325,
+                explanation: "Turun 2 tangga dikali 100. Menggeser koma 2 langkah ke kanan pada 3,25 menghasilkan 325 cl."
+            },
+            {
+                id: 5,
+                category: "Soal Langsung • Tangga Kubik",
+                question: "Ubahlah: <strong>6 m³ = ... dm³</strong>",
+                step1Label: "Langkah 1: Karena berpangkat kubik (³), turun 1 tangga dikali berapa?",
+                step1Type: "select",
+                step1Options: [
+                    { val: "10", text: "Dikali 10" },
+                    { val: "100", text: "Dikali 100" },
+                    { val: "1000", text: "Dikali 1.000" }
+                ],
+                step1Answer: "1000",
+                step1Hint: "Ingat! Satuan kubik (³) setiap turun 1 tangga dikali 1.000.",
+                step2Label: "Langkah 2: Tuliskan hasil akhirnya:",
+                step2Unit: "dm³",
+                step2Answer: 6000,
+                explanation: "Dari m³ ke dm³ turun 1 tangga kubik, sehingga 6 × 1.000 = 6.000 dm³."
+            },
+            {
+                id: 6,
+                category: "Soal Langsung • Tangga Kubik (Naik)",
+                question: "Ubahlah: <strong>45.000 cm³ = ... dm³</strong>",
+                step1Label: "Langkah 1: Dari cm³ ke dm³ naik 1 tangga kubik, artinya dibagi berapa?",
+                step1Type: "select",
+                step1Options: [
+                    { val: "10", text: "Dibagi 10" },
+                    { val: "100", text: "Dibagi 100" },
+                    { val: "1000", text: "Dibagi 1.000" }
+                ],
+                step1Answer: "1000",
+                step1Hint: "Naik 1 tangga pada satuan kubik (³) berarti dibagi 1.000.",
+                step2Label: "Langkah 2: Tuliskan hasil akhirnya:",
+                step2Unit: "dm³",
+                step2Answer: 45,
+                explanation: "Naik 1 tangga kubik dibagi 1.000 (coret tiga angka nol): 45.000 ÷ 1.000 = 45 dm³."
+            },
+            {
+                id: 7,
+                category: "Soal Langsung • Tangga Kubik (2 Tangga)",
+                question: "Ubahlah: <strong>2,4 dm³ = ... mm³</strong>",
+                step1Label: "Langkah 1: Dari dm³ ke mm³ turun 2 tangga kubik. Jadi dikali berapa?",
+                step1Type: "select",
+                step1Options: [
+                    { val: "1000", text: "Dikali 1.000" },
+                    { val: "100000", text: "Dikali 100.000" },
+                    { val: "1000000", text: "Dikali 1.000.000 (1 Juta)" }
+                ],
+                step1Answer: "1000000",
+                step1Hint: "Turun 2 tangga kubik berarti nolnya bertambah 3 + 3 = 6 nol (× 1.000.000).",
+                step2Label: "Langkah 2: Tuliskan hasil akhirnya:",
+                step2Unit: "mm³",
+                step2Answer: 2400000,
+                explanation: "2,4 × 1.000.000 = 2.400.000 mm³."
+            },
+            {
+                id: 8,
+                category: "Soal Langsung • Jembatan Utama",
+                question: "Ubahlah: <strong>18 dm³ = ... ml</strong>",
+                step1Label: "Langkah 1: Ubah dulu 18 dm³ ke dalam satuan Liter:",
+                step1Type: "number",
+                step1Placeholder: "Isi dalam Liter",
+                step1Answer: 18,
+                step1Hint: "Ingat jembatan utama: 1 dm³ = 1 Liter! Jadi 18 dm³ = 18 Liter.",
+                step2Label: "Langkah 2: Tuliskan hasil akhirnya dalam ml:",
+                step2Unit: "ml",
+                step2Answer: 18000,
+                explanation: "18 dm³ = 18 Liter. Kemudian 18 Liter × 1.000 = 18.000 ml."
+            },
+            {
+                id: 9,
+                category: "Soal Langsung • Jembatan Kecil (cc)",
+                question: "Ubahlah: <strong>3.500 cc = ... Liter</strong>",
+                step1Label: "Langkah 1: Ubah dulu 3.500 cc ke dalam satuan ml:",
+                step1Type: "number",
+                step1Placeholder: "Isi dalam ml",
+                step1Answer: 3500,
+                step1Hint: "Ingat jembatan kecil: 1 cc = 1 cm³ = 1 ml, jadi 3.500 cc = 3.500 ml.",
+                step2Label: "Langkah 2: Tuliskan hasil akhirnya dalam Liter:",
+                step2Unit: "Liter",
+                step2Answer: 3.5,
+                explanation: "3.500 cc = 3.500 ml. Dibagi 1.000 menjadi 3,5 Liter."
+            },
+            {
+                id: 10,
+                category: "Soal Langsung • Jembatan Raksasa",
+                question: "Ubahlah: <strong>4,5 m³ = ... Liter</strong>",
+                step1Label: "Langkah 1: Ubah dulu 4,5 m³ ke dalam satuan dm³:",
+                step1Type: "number",
+                step1Placeholder: "Isi dalam dm³",
+                step1Answer: 4500,
+                step1Hint: "Turun 1 tangga kubik: kalikan 4,5 dengan 1.000 untuk mengubah m³ ke dm³ (4.500).",
+                step2Label: "Langkah 2: Tuliskan hasil akhirnya dalam Liter:",
+                step2Unit: "Liter",
+                step2Answer: 4500,
+                explanation: "4,5 m³ = 4.500 dm³ = 4.500 Liter."
+            },
+            {
+                id: 11,
+                category: "Soal Langsung • Penjumlahan Satuan",
+                question: "Hitunglah: <strong>5 Liter + 250 ml = ... ml</strong>",
+                step1Label: "Langkah 1: Samakan satuannya terlebih dahulu! Ubah 5 Liter ke ml:",
+                step1Type: "number",
+                step1Placeholder: "Hasil dalam ml",
+                step1Answer: 5000,
+                step1Hint: "5 Liter × 1.000 = 5.000 ml.",
+                step2Label: "Langkah 2: Tuliskan hasil akhir penjumlahannya:",
+                step2Unit: "ml",
+                step2Answer: 5250,
+                explanation: "5.000 ml + 250 ml = 5.250 ml."
+            },
+            {
+                id: 12,
+                category: "Soal Langsung • Pengurangan Satuan",
+                question: "Hitunglah: <strong>4 kl - 1.200 Liter = ... Liter</strong>",
+                step1Label: "Langkah 1: Samakan satuannya terlebih dahulu! Ubah 4 kl ke Liter:",
+                step1Type: "number",
+                step1Placeholder: "Hasil dalam Liter",
+                step1Answer: 4000,
+                step1Hint: "1 kl = 1.000 Liter, jadi 4 kl = 4.000 Liter.",
+                step2Label: "Langkah 2: Tuliskan hasil akhir pengurangannya:",
+                step2Unit: "Liter",
+                step2Answer: 2800,
+                explanation: "4.000 Liter - 1.200 Liter = 2.800 Liter."
+            },
+            {
+                id: 13,
+                category: "Soal Langsung • Campuran Kubik & Liter",
+                question: "Hitunglah: <strong>25 dm³ + 4.000 cm³ = ... Liter</strong>",
+                step1Label: "Langkah 1: Ubah dulu 4.000 cm³ ke dalam satuan Liter:",
+                step1Type: "number",
+                step1Placeholder: "Hasil dalam Liter",
+                step1Answer: 4,
+                step1Hint: "4.000 cm³ = 4.000 ml = 4 Liter.",
+                step2Label: "Langkah 2: Tuliskan hasil akhir penjumlahannya:",
+                step2Unit: "Liter",
+                step2Answer: 29,
+                explanation: "25 dm³ (25 Liter) + 4.000 cm³ (4 Liter) = 29 Liter."
+            },
+            {
+                id: 14,
+                category: "Soal Langsung • Campuran m³ & dm³",
+                question: "Hitunglah: <strong>1,2 m³ - 350 dm³ = ... Liter</strong>",
+                step1Label: "Langkah 1: Ubah dulu 1,2 m³ ke dalam satuan dm³:",
+                step1Type: "number",
+                step1Placeholder: "Hasil dalam dm³",
+                step1Answer: 1200,
+                step1Hint: "1,2 × 1.000 = 1.200 dm³.",
+                step2Label: "Langkah 2: Tuliskan hasil akhirnya dalam Liter:",
+                step2Unit: "Liter",
+                step2Answer: 850,
+                explanation: "1.200 dm³ - 350 dm³ = 850 dm³ = 850 Liter."
+            },
+            {
+                id: 15,
+                category: "Soal Langsung • Tiga Satuan",
+                question: "Hitunglah: <strong>3 dal + 20 Liter + 5.000 ml = ... Liter</strong>",
+                step1Label: "Langkah 1: Ubah dulu 3 dal ke dalam satuan Liter:",
+                step1Type: "number",
+                step1Placeholder: "Hasil dalam Liter",
+                step1Answer: 30,
+                step1Hint: "3 dal × 10 = 30 Liter.",
+                step2Label: "Langkah 2: Tuliskan hasil akhir penjumlahan ketiganya:",
+                step2Unit: "Liter",
+                step2Answer: 55,
+                explanation: "30 Liter + 20 Liter + 5 Liter = 55 Liter."
+            },
+
+            // --- BAGIAN 2: SOAL CERITA KONTEKSTUAL (16-25) ---
+            {
+                id: 16,
+                category: "Soal Cerita • Toko Kelontong",
+                question: "Pak Budi memiliki persediaan minyak goreng sebanyak <strong>25 Liter</strong>. Hari ini terjual sebanyak <strong>12.500 ml</strong>. Berapa <strong>ml</strong> sisa minyak goreng Pak Budi sekarang?",
+                step1Label: "Langkah 1: Ubah stok awal 25 Liter ke dalam satuan ml:",
+                step1Type: "number",
+                step1Placeholder: "Stok awal (ml)",
+                step1Answer: 25000,
+                step1Hint: "25 Liter × 1.000 = 25.000 ml.",
+                step2Label: "Langkah 2: Hitung dan tuliskan jawaban akhir soal cerita ini:",
+                step2Unit: "ml",
+                step2Answer: 12500,
+                explanation: "25.000 ml - 12.500 ml = 12.500 ml."
+            },
+            {
+                id: 17,
+                category: "Soal Cerita • Kemasan Susu",
+                question: "Rina membeli <strong>6 kotak susu UHT</strong>. Setiap kotak berisi <strong>250 ml</strong> susu. Berapa <strong>Liter</strong> total susu yang dibeli Rina?",
+                step1Label: "Langkah 1: Hitung total seluruh susu dalam satuan ml:",
+                step1Type: "number",
+                step1Placeholder: "Total susu (ml)",
+                step1Answer: 1500,
+                step1Hint: "6 kotak × 250 ml = 1.500 ml.",
+                step2Label: "Langkah 2: Tuliskan jawaban akhirnya dalam satuan Liter:",
+                step2Unit: "Liter",
+                step2Answer: 1.5,
+                explanation: "6 × 250 ml = 1.500 ml. Dibagi 1.000 menjadi 1,5 Liter."
+            },
+            {
+                id: 18,
+                category: "Soal Cerita • Resep Obat",
+                question: "Adik harus meminum obat sirup <strong>3 kali sehari</strong>. Sekali minum takarannya adalah <strong>5 ml</strong>. Jika adik minum obat selama <strong>4 hari</strong>, berapa <strong>cc</strong> obat yang diminum adik?",
+                step1Label: "Langkah 1: Hitung total obat selama 4 hari dalam satuan ml:",
+                step1Type: "number",
+                step1Placeholder: "Total (ml)",
+                step1Answer: 60,
+                step1Hint: "Sehari = 3 × 5 = 15 ml. Selama 4 hari = 15 × 4 = 60 ml.",
+                step2Label: "Langkah 2: Tuliskan jawaban akhirnya dalam satuan cc:",
+                step2Unit: "cc",
+                step2Answer: 60,
+                explanation: "Total obat = 3 × 5 × 4 = 60 ml. Karena 1 ml = 1 cc, maka jawabannya 60 cc."
+            },
+            {
+                id: 19,
+                category: "Soal Cerita • SPBU & Bensin",
+                question: "Tangki mobil Ayah berisi <strong>12 Liter</strong> bensin. Di SPBU, Ayah mengisi lagi sebanyak <strong>28 dm³</strong>. Berapa <strong>Liter</strong> bensin di dalam tangki mobil Ayah sekarang?",
+                step1Label: "Langkah 1: Ubah bensin tambahan 28 dm³ ke dalam satuan Liter:",
+                step1Type: "number",
+                step1Placeholder: "Tambahan (Liter)",
+                step1Answer: 28,
+                step1Hint: "Karena 1 dm³ = 1 Liter, maka 28 dm³ = 28 Liter.",
+                step2Label: "Langkah 2: Hitung dan tuliskan total bensin sekarang:",
+                step2Unit: "Liter",
+                step2Answer: 40,
+                explanation: "12 Liter + 28 Liter = 40 Liter."
+            },
+            {
+                id: 20,
+                category: "Soal Cerita • Membagi Madu",
+                question: "Paman memanen <strong>5 Liter</strong> madu hutan murni. Madu tersebut akan dikemas ke dalam botol-botol kecil berukuran <strong>250 ml</strong>. Berapa <strong>botol</strong> yang dibutuhkan Paman?",
+                step1Label: "Langkah 1: Ubah total madu 5 Liter ke dalam satuan ml:",
+                step1Type: "number",
+                step1Placeholder: "Total madu (ml)",
+                step1Answer: 5000,
+                step1Hint: "5 Liter × 1.000 = 5.000 ml.",
+                step2Label: "Langkah 2: Hitung dan tuliskan banyak botol yang dibutuhkan:",
+                step2Unit: "botol",
+                step2Answer: 20,
+                explanation: "5.000 ml ÷ 250 ml = 20 botol."
+            },
+            {
+                id: 21,
+                category: "Soal Cerita • Kolam Renang Mini",
+                question: "Sebuah kolam renang karet memiliki kapasitas maksimal <strong>1,2 m³</strong>. Kolam itu baru diisi air sebanyak <strong>750 Liter</strong>. Berapa <strong>Liter</strong> air lagi yang diperlukan agar kolam penuh?",
+                step1Label: "Langkah 1: Ubah kapasitas maksimal kolam 1,2 m³ ke dalam satuan Liter:",
+                step1Type: "number",
+                step1Placeholder: "Kapasitas (Liter)",
+                step1Answer: 1200,
+                step1Hint: "1 m³ = 1.000 Liter, jadi 1,2 m³ = 1.200 Liter.",
+                step2Label: "Langkah 2: Hitung dan tuliskan kekurangan airnya:",
+                step2Unit: "Liter",
+                step2Answer: 450,
+                explanation: "1.200 Liter - 750 Liter = 450 Liter."
+            },
+            {
+                id: 22,
+                category: "Soal Cerita • Es Kelapa Muda",
+                question: "Bu Sari membuat <strong>18 Liter</strong> es kelapa muda untuk acara arisan. Sebanyak <strong>12.000 cm³</strong> es kelapa sudah habis diminum tamu. Berapa <strong>Liter</strong> sisa es kelapa muda Bu Sari?",
+                step1Label: "Langkah 1: Ubah es kelapa yang diminum (12.000 cm³) ke satuan Liter:",
+                step1Type: "number",
+                step1Placeholder: "Diminum (Liter)",
+                step1Answer: 12,
+                step1Hint: "12.000 cm³ = 12.000 ml = 12 Liter.",
+                step2Label: "Langkah 2: Hitung dan tuliskan sisa es kelapa muda:",
+                step2Unit: "Liter",
+                step2Answer: 6,
+                explanation: "18 Liter - 12 Liter = 6 Liter."
+            },
+            {
+                id: 23,
+                category: "Soal Cerita • Truk Tangki Air",
+                question: "Sebuah truk tangki membawa <strong>6 kl (Kiloliter)</strong> air bersih. Air tersebut disalurkan ke dua desa: Desa Maju mendapat <strong>2.500 Liter</strong> dan sisanya untuk Desa Makmur. Berapa <strong>Liter</strong> air yang diterima Desa Makmur?",
+                step1Label: "Langkah 1: Ubah seluruh air di truk (6 kl) ke dalam satuan Liter:",
+                step1Type: "number",
+                step1Placeholder: "Total air (Liter)",
+                step1Answer: 6000,
+                step1Hint: "6 kl × 1.000 = 6.000 Liter.",
+                step2Label: "Langkah 2: Hitung dan tuliskan bagian air Desa Makmur:",
+                step2Unit: "Liter",
+                step2Answer: 3500,
+                explanation: "6.000 Liter - 2.500 Liter = 3.500 Liter."
+            },
+            {
+                id: 24,
+                category: "Soal Cerita • Praktikum IPA",
+                question: "Dalam praktikum IPA, Edo mencampurkan <strong>350 ml</strong> air mineral, <strong>1,5 dl</strong> cairan pewarna, dan <strong>200 cm³</strong> cairan cuka ke dalam tabung besar. Berapa <strong>ml</strong> total campuran cairan tersebut?",
+                step1Label: "Langkah 1: Ubah cairan pewarna (1,5 dl) ke dalam satuan ml:",
+                step1Type: "number",
+                step1Placeholder: "Hasil (ml)",
+                step1Answer: 150,
+                step1Hint: "1,5 dl × 100 = 150 ml.",
+                step2Label: "Langkah 2: Hitung dan tuliskan total seluruh campuran cairan:",
+                step2Unit: "ml",
+                step2Answer: 700,
+                explanation: "350 ml + 150 ml + 200 ml = 700 ml."
+            },
+            {
+                id: 25,
+                category: "Soal Cerita • Tantangan Akhir",
+                question: "Sebuah bak penampungan berisi <strong>0,8 m³</strong> air. Karena bocor halus, air berkurang sebanyak <strong>150 dm³</strong>. Sisa air di bak tersebut akan dialirkan ke dalam galon-galon berkapasitas <strong>10 Liter</strong>. Berapa <strong>galon</strong> yang dapat terisi penuh?",
+                step1Label: "Langkah 1: Hitung sisa air di dalam bak dalam satuan Liter:",
+                step1Type: "number",
+                step1Placeholder: "Sisa air (Liter)",
+                step1Answer: 650,
+                step1Hint: "0,8 m³ = 800 Liter. Dikurangi 150 dm³ (150 Liter) = 650 Liter.",
+                step2Label: "Langkah 2: Hitung dan tuliskan jumlah galon yang terisi penuh:",
+                step2Unit: "galon",
+                step2Answer: 65,
+                explanation: "Sisa air = 800 - 150 = 650 Liter. Dibagi 10 Liter per galon = 65 galon."
+            }
+        ];
+
+        // =========================================================================
+        // STATE MANAGEMENT & LOCALSTORAGE PERSISTENCE
+        // =========================================================================
+        const STORAGE_KEY = 'kuis_konversi_volume_25_v1';
+
+        let appState = {
+            currentIndex: 0,
+            // answers[id] = { step1Val: '', step2Val: '', status: 'unanswered' | 'correct' | 'wrong', feedbackMsg: '' }
+            answers: {}
+        };
+
+        // Load saved state from localStorage safely
+        function loadState() {
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && typeof parsed === 'object') {
+                        appState.currentIndex = typeof parsed.currentIndex === 'number' ? parsed.currentIndex : 0;
+                        appState.answers = parsed.answers || {};
+                    }
+                }
+            } catch (e) {
+                console.warn('Gagal memuat penyimpanan lokal:', e);
+            }
+        }
+
+        // Save state to localStorage immediately on every interaction
+        function saveState() {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+            } catch (e) {
+                console.warn('Gagal menyimpan ke penyimpanan lokal:', e);
+            }
+        }
+
+        // =========================================================================
+        // RENDERING & INTERACTION LOGIC
+        // =========================================================================
+        function initApp() {
+            loadState();
+            renderNavGrid();
+            renderQuestion(appState.currentIndex);
+            updateStats();
+        }
+
+        function renderNavGrid() {
+            const grid = document.getElementById('nav-grid');
+            grid.innerHTML = '';
+
+            questionsData.forEach((q, idx) => {
+                const ansObj = appState.answers[q.id];
+                const isCurrent = idx === appState.currentIndex;
+
+                let btnClass = 'bg-slate-100 border-slate-300 text-slate-700 hover:bg-slate-200';
+                if (ansObj) {
+                    if (ansObj.status === 'correct') {
+                        btnClass = 'bg-emerald-500 border-emerald-600 text-white shadow-sm';
+                    } else if (ansObj.status === 'wrong') {
+                        btnClass = 'bg-rose-500 border-rose-600 text-white shadow-sm';
+                    }
+                }
+
+                if (isCurrent) {
+                    btnClass += ' ring-2 ring-offset-2 ring-indigo-600 font-extrabold scale-105';
+                }
+
+                const btn = document.createElement('button');
+                btn.className = `h-9 rounded-xl border text-xs font-bold transition-all flex items-center justify-center ${btnClass}`;
+                btn.textContent = q.id;
+                btn.onclick = () => {
+                    appState.currentIndex = idx;
+                    saveState();
+                    renderQuestion(idx);
+                    renderNavGrid();
+                };
+                grid.appendChild(btn);
+            });
+        }
+
+        function renderQuestion(index) {
+            const q = questionsData[index];
+            const saved = appState.answers[q.id] || { step1Val: '', step2Val: '', status: 'unanswered', feedbackMsg: '' };
+            const container = document.getElementById('question-container');
+
+            // Badge styling
+            let statusBadge = `<span class="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full">Belum Dijawab</span>`;
+            if (saved.status === 'correct') {
+                statusBadge = `<span class="text-xs font-extrabold text-emerald-700 bg-emerald-100 border border-emerald-300 px-3 py-1 rounded-full">✅ Jawaban Benar</span>`;
+            } else if (saved.status === 'wrong') {
+                statusBadge = `<span class="text-xs font-extrabold text-rose-700 bg-rose-100 border border-rose-300 px-3 py-1 rounded-full">❌ Belum Tepat</span>`;
+            }
+
+            // Step 1 input HTML
+            let step1InputHTML = '';
+            if (q.step1Type === 'select') {
+                const optionsHTML = q.step1Options.map(opt => 
+                    `<option value="${opt.val}" ${String(saved.step1Val) === String(opt.val) ? 'selected' : ''}>${opt.text}</option>`
+                ).join('');
+                step1InputHTML = `
+                    <select id="input-step1" onchange="handleDraftInput(${q.id})" class="w-full p-3 border-2 border-slate-300 rounded-xl font-bold text-slate-800 bg-white focus:border-indigo-600 focus:outline-none text-xs md:text-sm">
+                        <option value="">-- Pilih Jawaban Langkah 1 --</option>
+                        ${optionsHTML}
+                    </select>
+                `;
+            } else {
+                step1InputHTML = `
+                    <input type="number" step="any" id="input-step1" value="${saved.step1Val}" oninput="handleDraftInput(${q.id})" placeholder="${q.step1Placeholder || 'Ketik angka...'}" class="w-full p-3 border-2 border-slate-300 rounded-xl font-extrabold text-slate-900 bg-white focus:border-indigo-600 focus:outline-none text-xs md:text-sm">
+                `;
+            }
+
+            // Feedback box HTML
+            let feedbackHTML = '';
+            if (saved.status === 'correct') {
+                feedbackHTML = `
+                    <div class="mt-4 p-4 rounded-2xl bg-emerald-50 border-2 border-emerald-300 text-emerald-900 text-xs md:text-sm space-y-1 fade-in">
+                        <div class="font-extrabold text-emerald-700 text-sm">🎉 Hebat! Jawaban Kamu Benar!</div>
+                        <p>${q.explanation}</p>
+                    </div>
+                `;
+            } else if (saved.status === 'wrong') {
+                feedbackHTML = `
+                    <div class="mt-4 p-4 rounded-2xl bg-rose-50 border-2 border-rose-300 text-rose-900 text-xs md:text-sm space-y-1 fade-in">
+                        <div class="font-extrabold text-rose-700 text-sm">⚠️ Ups, Masih Kurang Tepat!</div>
+                        <p>${saved.feedbackMsg}</p>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = `
+                <div class="flex flex-wrap justify-between items-center gap-2 border-b border-slate-100 pb-4 mb-5">
+                    <div class="flex items-center gap-2">
+                        <span class="bg-indigo-600 text-white text-xs font-extrabold px-3 py-1 rounded-xl">Soal #${q.id}</span>
+                        <span class="text-xs font-bold text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-lg">${q.category}</span>
+                    </div>
+                    ${statusBadge}
+                </div>
+
+                <div class="bg-slate-50 p-4 md:p-5 rounded-2xl border border-slate-200 mb-6">
+                    <p class="text-base md:text-lg text-slate-900 leading-relaxed font-medium">${q.question}</p>
+                </div>
+
+                <!-- Guided Steps Box -->
+                <div class="space-y-4">
+                    <div class="bg-blue-50/60 p-4 rounded-2xl border border-blue-200/80 space-y-2">
+                        <label class="block text-xs md:text-sm font-extrabold text-blue-950">${q.step1Label}</label>
+                        ${step1InputHTML}
+                    </div>
+
+                    <div class="bg-teal-50/60 p-4 rounded-2xl border border-teal-200/80 space-y-2">
+                        <label class="block text-xs md:text-sm font-extrabold text-teal-950">${q.step2Label}</label>
+                        <div class="flex items-center gap-3">
+                            <input type="number" step="any" id="input-step2" value="${saved.step2Val}" oninput="handleDraftInput(${q.id})" placeholder="Ketik jawaban akhir..." class="w-full p-3 border-2 border-slate-300 rounded-xl font-extrabold text-slate-900 bg-white focus:border-teal-600 focus:outline-none text-sm md:text-base">
+                            <span class="font-extrabold text-slate-700 text-sm whitespace-nowrap bg-white px-3.5 py-3 rounded-xl border border-slate-200">${q.step2Unit}</span>
+                        </div>
+                    </div>
+
+                    <button onclick="checkCurrentAnswer(${q.id})" class="w-full bg-gradient-to-r from-indigo-600 to-teal-600 hover:from-indigo-700 hover:to-teal-700 text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-md transition-all text-sm md:text-base">
+                        ✔️ Periksa Jawaban Sekarang
+                    </button>
+                </div>
+
+                <div id="feedback-area">${feedbackHTML}</div>
+            `;
+
+            // Update prev/next buttons & label
+            document.getElementById('current-num-label').textContent = index + 1;
+            document.getElementById('btn-prev').disabled = index === 0;
+            document.getElementById('btn-next').disabled = index === questionsData.length - 1;
+        }
+
+        // Save draft inputs automatically even before clicking "Periksa"
+        function handleDraftInput(qId) {
+            const s1 = document.getElementById('input-step1').value;
+            const s2 = document.getElementById('input-step2').value;
+            const existing = appState.answers[qId] || { status: 'unanswered', feedbackMsg: '' };
+
+            appState.answers[qId] = {
+                step1Val: s1,
+                step2Val: s2,
+                status: existing.status,
+                feedbackMsg: existing.feedbackMsg
+            };
+            saveState();
+        }
+
+        // Helper for floating point comparison (e.g., 1.5 vs 1,5)
+        function isNumberEqual(a, b) {
+            if (isNaN(a) || isNaN(b)) return false;
+            return Math.abs(a - b) < 0.0001;
+        }
+
+        function checkCurrentAnswer(qId) {
+            const q = questionsData.find(item => item.id === qId);
+            const rawStep1 = document.getElementById('input-step1').value.trim();
+            const rawStep2 = document.getElementById('input-step2').value.trim();
+
+            if (rawStep1 === '' || rawStep2 === '') {
+                appState.answers[qId] = {
+                    step1Val: rawStep1,
+                    step2Val: rawStep2,
+                    status: 'wrong',
+                    feedbackMsg: 'Harap isi kedua kotak (Langkah 1 dan Langkah 2) terlebih dahulu sebelum memeriksa jawaban!'
+                };
+                saveState();
+                renderQuestion(appState.currentIndex);
+                return;
+            }
+
+            // Check Step 1
+            let step1Correct = false;
+            if (q.step1Type === 'select') {
+                step1Correct = rawStep1 === String(q.step1Answer);
+            } else {
+                step1Correct = isNumberEqual(parseFloat(rawStep1), q.step1Answer);
+            }
+
+            if (!step1Correct) {
+                appState.answers[qId] = {
+                    step1Val: rawStep1,
+                    step2Val: rawStep2,
+                    status: 'wrong',
+                    feedbackMsg: `Cek kembali <strong>Langkah 1</strong>: ${q.step1Hint}`
+                };
+                saveState();
+                renderQuestion(appState.currentIndex);
+                renderNavGrid();
+                updateStats();
+                return;
+            }
+
+            // Check Step 2
+            const step2Correct = isNumberEqual(parseFloat(rawStep2), q.step2Answer);
+            if (!step2Correct) {
+                appState.answers[qId] = {
+                    step1Val: rawStep1,
+                    step2Val: rawStep2,
+                    status: 'wrong',
+                    feedbackMsg: `<strong>Langkah 1 sudah benar!</strong> Namun hitungan akhir pada <strong>Langkah 2</strong> masih keliru. Coba tentukan operasi hitung yang tepat dan hitung ulang ya!`
+                };
+                saveState();
+                renderQuestion(appState.currentIndex);
+                renderNavGrid();
+                updateStats();
+                return;
+            }
+
+            // Both steps correct!
+            appState.answers[qId] = {
+                step1Val: rawStep1,
+                step2Val: rawStep2,
+                status: 'correct',
+                feedbackMsg: ''
+            };
+            saveState();
+            renderQuestion(appState.currentIndex);
+            renderNavGrid();
+            updateStats();
+        }
+
+        function navigateQuestion(delta) {
+            const nextIdx = appState.currentIndex + delta;
+            if (nextIdx >= 0 && nextIdx < questionsData.length) {
+                appState.currentIndex = nextIdx;
+                saveState();
+                renderQuestion(nextIdx);
+                renderNavGrid();
+            }
+        }
+
+        function updateStats() {
+            let correctCount = 0;
+            let answeredCount = 0;
+
+            questionsData.forEach(q => {
+                const ans = appState.answers[q.id];
+                if (ans && (ans.status === 'correct' || ans.status === 'wrong')) {
+                    answeredCount++;
+                    if (ans.status === 'correct') correctCount++;
+                }
+            });
+
+            document.getElementById('header-score').textContent = correctCount;
+            document.getElementById('answered-count').textContent = answeredCount;
+            const pct = Math.round((answeredCount / questionsData.length) * 100);
+            document.getElementById('progress-bar').style.width = `${pct}%`;
+        }
+
+        // =========================================================================
+        // MODALS & CHEAT SHEET
+        // =========================================================================
+        function toggleCheatSheet() {
+            const body = document.getElementById('cheat-body');
+            const icon = document.getElementById('cheat-icon');
+            body.classList.toggle('hidden');
+            icon.textContent = body.classList.contains('hidden') ? 'Buka ▼' : 'Tutup ▲';
+        }
+
+        function openResetModal() {
+            document.getElementById('reset-modal').classList.remove('hidden');
+        }
+
+        function closeResetModal() {
+            document.getElementById('reset-modal').classList.add('hidden');
+        }
+
+        function confirmResetAll() {
+            appState = { currentIndex: 0, answers: {} };
+            saveState();
+            closeResetModal();
+            renderNavGrid();
+            renderQuestion(0);
+            updateStats();
+        }
+
+        function showSummaryModal() {
+            let correct = 0;
+            let wrong = 0;
+            let empty = 0;
+
+            questionsData.forEach(q => {
+                const ans = appState.answers[q.id];
+                if (!ans || ans.status === 'unanswered') {
+                    empty++;
+                } else if (ans.status === 'correct') {
+                    correct++;
+                } else {
+                    wrong++;
+                }
+            });
+
+            const grade = Math.round((correct / questionsData.length) * 100);
+            document.getElementById('summary-grade').textContent = grade;
+            document.getElementById('sum-correct').textContent = correct;
+            document.getElementById('sum-wrong').textContent = wrong;
+            document.getElementById('sum-empty').textContent = empty;
+
+            const emojiEl = document.getElementById('summary-emoji');
+            const msgEl = document.getElementById('summary-message');
+
+            if (grade === 100) {
+                emojiEl.textContent = '🏆🌟';
+                msgEl.textContent = 'Sempurna! Kamu berhasil menjawab seluruh 25 soal konversi satuan volume dengan benar!';
+            } else if (grade >= 80) {
+                emojiEl.textContent = '🎉👏';
+                msgEl.textContent = 'Hebat sekali! Pemahamanmu tentang konversi satuan volume sudah sangat kuat.';
+            } else if (grade >= 60) {
+                emojiEl.textContent = '👍💪';
+                msgEl.textContent = 'Bagus! Yuk perbaiki beberapa nomor yang masih merah di panel navigasi agar nilaimu makin tinggi.';
+            } else {
+                emojiEl.textContent = '📚✨';
+                msgEl.textContent = 'Terus berlatih! Gunakan kotak bantuan tangga satuan di atas dan ikuti petunjuk Langkah 1 & Langkah 2.';
+            }
+
+            document.getElementById('summary-modal').classList.remove('hidden');
+        }
+
+        function closeSummaryModal() {
+            document.getElementById('summary-modal').classList.add('hidden');
+        }
+
+        // Start App
+        window.onload = initApp;
+    </script>
+</body>
+</html>
